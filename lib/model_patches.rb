@@ -6,7 +6,17 @@
 # See http://stackoverflow.com/questions/7072758/plugin-not-reloading-in-development-mode
 #
 Rails.configuration.to_prepare do
+  RawEmail.class_eval do
+    alias original_data data
 
+    def data
+      original_data.sub(/
+        ^(Date: [^\n]+\n)
+        \s+(To: [^\n]+\n)
+        \s+(From: [^\n]+)
+      /x, '\1\2\3')
+    end
+  end
   # Example of adding a default text to each message
   # OutgoingMessage.class_eval do
   #   # Add intro paragraph to new request template

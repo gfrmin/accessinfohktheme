@@ -1,0 +1,38 @@
+Dear <%= @info_request.user_name %>,
+
+Your request for information to <%= @info_request.public_body.name %> has exceeded the target response time under Hong Kong's Code on Access to Information.
+
+Request: <%= @info_request.title %>
+Submitted: <%= simple_date(@info_request.created_at) %>
+Days elapsed: <%= ((Time.now - @info_request.created_at) / 1.day).floor %> calendar days
+
+Under the Code on Access to Information:
+- Departments should provide an initial response or interim reply within 10 calendar days
+- The target completion time is 21 calendar days
+- The maximum processing time is 51 calendar days in exceptional circumstances
+
+What you can do now:
+
+1. SEND A REMINDER
+   You can send a polite reminder to the department through <%= site_name %>:
+   <%= request_url(@info_request) %>
+
+2. REQUEST AN INTERNAL REVIEW
+   If the department is significantly overdue or unresponsive, you can request an internal review by a senior officer:
+   <%= new_request_followup_url(@info_request.url_title, internal_review: '1') %>
+
+3. COMPLAIN TO THE OMBUDSMAN
+   If an internal review doesn't resolve the issue, you can lodge a complaint with The Ombudsman (申訴專員):
+   https://www.ombudsman.hk/
+
+The Code on Access to Information is an administrative code that governs how Hong Kong government departments handle information requests. While it is not legislation, departments are expected to comply with its provisions.
+
+For more information about what to do if you're unhappy with a response, visit:
+<%= help_unhappy_url %>
+
+Best regards,
+<%= pro_site_name %>
+
+---
+You are receiving this email because you made a request through <%= site_name %>.
+To stop receiving these reminder emails, visit: <%= user_url(@info_request.user) %>

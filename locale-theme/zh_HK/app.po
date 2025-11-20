@@ -197,3 +197,240 @@ msgstr "未知狀態 "
 
 msgid "unknown calculate_status "
 msgstr "未知的計算狀態 "
+
+# Controller helper deadline messages
+msgid "Department should respond within %{days} calendar days (by %{date})"
+msgstr "部門應在%{days}個曆日內回覆（截止日期：%{date}）"
+
+msgid "Target response time is %{days} calendar days (by %{date})"
+msgstr "目標回覆時間為%{days}個曆日（截止日期：%{date}）"
+
+msgid "Request overdue. Maximum time is %{days} calendar days (by %{date})"
+msgstr "要求已逾期。最長時間為%{days}個曆日（截止日期：%{date}）"
+
+msgid "Request significantly overdue (exceeded 51 calendar day maximum). Consider requesting an internal review or complaining to The Ombudsman."
+msgstr "要求嚴重逾期（已超過51個曆日的最長期限）。請考慮要求內部覆核或向申訴專員投訴。"
+
+msgid "This request has exceeded the 51 calendar day maximum under the Code on Access to Information."
+msgstr "此要求已超過《公開資料守則》規定的51個曆日最長期限。"
+
+msgid "This request has exceeded the 21 calendar day target response time."
+msgstr "此要求已超過21個曆日的目標回覆時間。"
+
+# Additional request-related terms
+msgid "days remaining"
+msgstr "剩餘天數"
+
+msgid "days overdue"
+msgstr "逾期天數"
+
+msgid "deadline"
+msgstr "截止日期"
+
+msgid "response received"
+msgstr "已收到回覆"
+
+msgid "no response"
+msgstr "未收到回覆"
+
+msgid "awaiting response"
+msgstr "等待回覆"
+
+# Actions and processes
+msgid "send a reminder"
+msgstr "發送提醒"
+
+msgid "request internal review"
+msgstr "要求內部覆核"
+
+msgid "lodge a complaint"
+msgstr "提出投訴"
+
+msgid "refine your request"
+msgstr "修改你的要求"
+
+msgid "update request status"
+msgstr "更新要求狀態"
+
+msgid "view response"
+msgstr "查看回覆"
+
+msgid "follow up"
+msgstr "跟進"
+
+# Email-specific terms
+msgid "overdue alert"
+msgstr "逾期提醒"
+
+msgid "new response notification"
+msgstr "新回覆通知"
+
+msgid "reminder email"
+msgstr "提醒電郵"
+
+msgid "important alert"
+msgstr "重要提醒"
+
+# Document types
+msgid "correspondence"
+msgstr "來往信件"
+
+msgid "attachment"
+msgstr "附件"
+
+msgid "PDF document"
+msgstr "PDF文件"
+
+msgid "email"
+msgstr "電郵"
+
+msgid "letter"
+msgstr "信件"
+
+# Status categories
+msgid "successful"
+msgstr "成功"
+
+msgid "partially successful"
+msgstr "部分成功"
+
+msgid "refused"
+msgstr "被拒絕"
+
+msgid "waiting clarification"
+msgstr "等待澄清"
+
+msgid "waiting response"
+msgstr "等待回覆"
+
+msgid "overdue"
+msgstr "逾期"
+
+msgid "significantly overdue"
+msgstr "嚴重逾期"
+
+# Help and guidance terms
+msgid "what to do next"
+msgstr "下一步做什麼"
+
+msgid "recommended actions"
+msgstr "建議行動"
+
+msgid "common questions"
+msgstr "常見問題"
+
+msgid "for more information"
+msgstr "了解更多資訊"
+
+msgid "help pages"
+msgstr "幫助頁面"
+
+msgid "user guide"
+msgstr "用戶指南"
+
+# Time-related phrases
+msgid "within"
+msgstr "在…之內"
+
+msgid "by"
+msgstr "於"
+
+msgid "before"
+msgstr "在…之前"
+
+msgid "after"
+msgstr "在…之後"
+
+msgid "elapsed"
+msgstr "已過"
+
+# Administrative terms
+msgid "administrative code"
+msgstr "行政守則"
+
+msgid "not legislation"
+msgstr "並非法例"
+
+msgid "no statutory right"
+msgstr "沒有法定權利"
+
+msgid "expected to comply"
+msgstr "預期會遵守"
+
+msgid "good governance"
+msgstr "良好管治"
+
+msgid "transparency"
+msgstr "透明度"
+
+msgid "accountability"
+msgstr "問責"
+
+# Website-specific
+msgid "browse requests"
+msgstr "瀏覽要求"
+
+msgid "make a request"
+msgstr "提出要求"
+
+msgid "search"
+msgstr "搜尋"
+
+msgid "advanced search"
+msgstr "進階搜尋"
+
+msgid "user account"
+msgstr "用戶帳戶"
+
+msgid "sign in"
+msgstr "登入"
+
+msgid "sign out"
+msgstr "登出"
+
+msgid "register"
+msgstr "註冊"
+
+msgid "profile"
+msgstr "個人資料"
+
+msgid "settings"
+msgstr "設定"
+
+msgid "email preferences"
+msgstr "電郵偏好"
+
+# Error and warning messages
+msgid "error"
+msgstr "錯誤"
+
+msgid "warning"
+msgstr "警告"
+
+msgid "notice"
+msgstr "通知"
+
+msgid "success"
+msgstr "成功"
+
+msgid "information"
+msgstr "資訊"
+
+# Politeness and formality
+msgid "Dear"
+msgstr "親愛的"
+
+msgid "Best regards"
+msgstr "此致敬禮"
+
+msgid "Sincerely"
+msgstr "謹啟"
+
+msgid "Thank you"
+msgstr "謝謝"
+
+msgid "Please"
+msgstr "請"
+
+msgid "You are welcome"
+msgstr "不用客氣"

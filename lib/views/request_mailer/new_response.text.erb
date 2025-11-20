@@ -1,0 +1,67 @@
+Dear <%= @info_request.user_name %>,
+
+<%= @info_request.public_body.name %> has responded to your request for information.
+
+Request: <%= @info_request.title %>
+Submitted: <%= simple_date(@info_request.created_at) %>
+Response received: <%= simple_date(@incoming_message.created_at) %>
+Response time: <%= (((@incoming_message.created_at - @info_request.created_at) / 1.day).floor) %> calendar days
+
+View the response here:
+<%= incoming_message_url(@incoming_message) %>
+
+WHAT TO DO NEXT:
+
+1. REVIEW THE RESPONSE
+   Read the department's response carefully. Check if they have:
+   - Provided the information you requested
+   - Given valid reasons for any refusals (referencing Part 2 of the Code)
+   - Indicated whether photocopying charges apply
+   - Provided an interim reply explaining the need for more time
+
+2. UPDATE THE REQUEST STATUS
+   Please help other users by updating your request's status:
+   <%= describe_state_url(@info_request.url_title) %>
+
+   Common statuses:
+   - Successful: You received the information
+   - Partially successful: Some information provided, some withheld
+   - Waiting clarification: Department needs more information from you
+   - Refused: Request denied (check if reasons are valid under Part 2)
+   - Waiting response: Interim reply received, final response still pending
+
+3. IF YOU'RE NOT SATISFIED
+
+   <%= help_unhappy_url %>
+
+   You can:
+   - Request an internal review by a senior officer
+   - Complain to The Ombudsman (申訴專員) if the internal review is unsatisfactory
+   - Refine your request to be more specific or address the department's concerns
+
+4. IF PHOTOCOPYING CHARGES APPLY
+
+   If the department indicates charges (HK$1.5 per A4 page, HK$1.6 per A3 page):
+   - You can agree to pay and provide proof of payment
+   - Request electronic copies instead (often free)
+   - Refine your request to reduce the volume of documents
+   - Ask to inspect documents in person
+
+ABOUT THE CODE ON ACCESS TO INFORMATION:
+
+The Code is an administrative framework (not legislation) that governs how Hong Kong government departments handle information requests. Response times are:
+- 10 calendar days: Initial response or interim reply
+- 21 calendar days: Target completion time
+- 51 calendar days: Maximum in exceptional circumstances
+
+For more information:
+- Help pages: <%= help_requesting_url %>
+- Response timelines: <%= help_general_url(template: 'timelines') %>
+- Exemptions explained: <%= help_general_url(template: 'exemptions') %>
+
+Best regards,
+<%= pro_site_name %>
+
+---
+You are receiving this email because you made a request through <%= site_name %>.
+To manage your email preferences, visit: <%= user_url(@info_request.user) %>

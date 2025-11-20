@@ -1,0 +1,171 @@
+<% @title = "Response Timelines" %>
+
+<%= render :partial => 'sidebar' %>
+<div id="left_column_flip" class="left_column_flip">
+  <h1 id="timelines"><%= @title %> <a href="#timelines">#</a></h1>
+
+  <p>Under Hong Kong's <a href="https://www.access.gov.hk/">Code on Access to Information</a>, government departments should follow specific timelines when responding to information requests. Understanding these timelines helps you know when to follow up or escalate your request.</p>
+
+  <p><strong>Key difference:</strong> The Code measures timelines in <strong>calendar days</strong>, not working days. This includes weekends and public holidays.</p>
+
+  <h2 id="standard_timeline">Standard Timeline <a href="#standard_timeline">#</a></h2>
+
+  <dl>
+    <dt id="day_0">Day 0: You Submit Your Request <a href="#day_0">#</a></dt>
+    <dd>
+      <p>When you submit your request through <%= site_name %>, it is sent by email to the department's designated Access to Information Officer. The timeline starts from the date the department receives your request.</p>
+    </dd>
+
+    <dt id="day_10">Day 10: Initial Response or Interim Reply <a href="#day_10">#</a></dt>
+    <dd>
+      <p>Within <strong>10 calendar days</strong> of receiving your request, the department should either:</p>
+      <ul>
+        <li><strong>Provide the information</strong> you requested, or</li>
+        <li><strong>Send an interim reply</strong> explaining why they need more time and when you can expect a final response</li>
+      </ul>
+      <p>If you receive an interim reply, the department should explain the reason for the delay (e.g., need to consult other departments, large volume of records to review, etc.).</p>
+    </dd>
+
+    <dt id="day_21">Day 21: Target Completion Time <a href="#day_21">#</a></dt>
+    <dd>
+      <p>The <strong>target completion time</strong> is <strong>21 calendar days</strong> from the date your request was received. By this date, you should receive:</p>
+      <ul>
+        <li>The information you requested</li>
+        <li>A refusal with valid reasons under <a href="<%= help_path(anchor: 'exemptions') %>">Part 2 of the Code</a></li>
+        <li>A partial response with explanation for any withheld information</li>
+      </ul>
+    </dd>
+
+    <dt id="day_51">Day 51: Maximum Time in Exceptional Circumstances <a href="#day_51">#</a></dt>
+    <dd>
+      <p>In <strong>exceptional circumstances</strong>, a department may take up to <strong>51 calendar days</strong> to respond. However:</p>
+      <ul>
+        <li>The department must explain why the delay is necessary</li>
+        <li>Any extension should be kept to a minimum</li>
+        <li>The total processing time should <strong>not normally exceed 51 days</strong></li>
+      </ul>
+      <p><strong>Examples of exceptional circumstances:</strong></p>
+      <ul>
+        <li>Very large volume of records to review</li>
+        <li>Need to consult multiple departments or external parties</li>
+        <li>Complex legal or policy considerations</li>
+        <li>Staff shortages due to unforeseen circumstances</li>
+      </ul>
+    </dd>
+  </dl>
+
+  <h2 id="what_to_do">What to Do at Each Stage <a href="#what_to_do">#</a></h2>
+
+  <table class="timeline-guide">
+    <thead>
+      <tr>
+        <th>Days Elapsed</th>
+        <th>Status</th>
+        <th>What You Should Do</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>0-10 days</td>
+        <td>Wait for initial response</td>
+        <td>Be patient. The department has 10 days to respond or send an interim reply.</td>
+      </tr>
+      <tr>
+        <td>11-20 days</td>
+        <td>No initial response</td>
+        <td>Send a polite reminder through <%= site_name %>. Mention that 10 days have passed and you're awaiting an initial response.</td>
+      </tr>
+      <tr>
+        <td>10-21 days</td>
+        <td>Interim reply received</td>
+        <td>Wait for the final response. The target is 21 days total from your original request.</td>
+      </tr>
+      <tr>
+        <td>22-30 days</td>
+        <td>Exceeded target time</td>
+        <td>Send a reminder noting that the 21-day target has passed. Ask when you can expect a response.</td>
+      </tr>
+      <tr>
+        <td>31-51 days</td>
+        <td>Extended delay</td>
+        <td>If the department hasn't provided an explanation for the delay, send a firm reminder. Reference the Code's 51-day maximum.</td>
+      </tr>
+      <tr>
+        <td>52+ days</td>
+        <td>Exceeded maximum time</td>
+        <td><strong>Request an internal review</strong> through <%= site_name %>. If that doesn't help, <strong>complain to The Ombudsman</strong>.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="calculating_days">How to Calculate Calendar Days <a href="#calculating_days">#</a></h2>
+
+  <p><strong>Important:</strong> The Code uses <strong>calendar days</strong>, which include:</p>
+  <ul>
+    <li>Weekdays (Monday-Friday)</li>
+    <li>Weekends (Saturday-Sunday)</li>
+    <li>Public holidays</li>
+  </ul>
+
+  <p><strong>Example calculation:</strong></p>
+  <ul>
+    <li>Request submitted: Monday, January 1</li>
+    <li>10-day deadline: Thursday, January 11 (includes one weekend)</li>
+    <li>21-day deadline: Monday, January 22 (includes two weekends)</li>
+    <li>51-day deadline: Wednesday, February 21 (includes multiple weekends and possibly holidays)</li>
+  </ul>
+
+  <p><%= site_name %> automatically tracks these timelines for you and will send you email reminders if a department doesn't respond on time.</p>
+
+  <h2 id="exceptions">When Timelines May Be Different <a href="#exceptions">#</a></h2>
+
+  <p>The standard 10/21/51 day timeline may be affected by:</p>
+
+  <dl>
+    <dt>Clarification Requests</dt>
+    <dd>If the department asks you to clarify your request, the timeline restarts from when you provide the clarification.</dd>
+
+    <dt>Payment Required</dt>
+    <dd>If photocopying charges apply (HK$1.5/A4 page, HK$1.6/A3 page), the department will not release information until payment is received. This may extend the timeline.</dd>
+
+    <dt>Third Party Consultations</dt>
+    <dd>If the department needs to consult third parties whose interests may be affected, this may justify an extension beyond 21 days.</dd>
+  </dl>
+
+  <h2 id="enforcement">Enforcement and Compliance <a href="#enforcement">#</a></h2>
+
+  <p><strong>Important:</strong> The Code is an administrative code, not legislation. This means:</p>
+  <ul>
+    <li>There is no statutory right to information</li>
+    <li>Timelines are targets and expectations, not legal requirements</li>
+    <li>You cannot sue a department for missing a deadline</li>
+    <li>Your main recourse is internal review and complaints to The Ombudsman</li>
+  </ul>
+
+  <p>However, departments are expected to comply with the Code as a matter of good governance, and The Ombudsman can investigate and criticize departments that fail to follow it.</p>
+
+  <h2 id="escalation">Escalating Delayed Requests <a href="#escalation">#</a></h2>
+
+  <p>If your request is significantly delayed:</p>
+
+  <ol>
+    <li><strong>Send reminders</strong> through <%= site_name %> (polite but firm)</li>
+    <li><strong>Request an internal review</strong> after 51 days or if the department is unresponsive</li>
+    <li><strong>Complain to The Ombudsman</strong> if the internal review doesn't resolve the issue</li>
+    <li><strong>Contact your Legislative Council member</strong> to raise awareness of systemic delays</li>
+  </ol>
+
+  <p>Read more about <a href="<%= help_general_path(:template => 'unhappy') %>">what to do if you're unhappy with a response</a>.</p>
+
+  <h2 id="resources">Additional Resources <a href="#resources">#</a></h2>
+
+  <ul>
+    <li><a href="https://www.access.gov.hk/">Code on Access to Information website</a> - Official guidelines</li>
+    <li><a href="https://www.ombudsman.hk/">The Ombudsman</a> - Lodge complaints about delays</li>
+    <li><a href="<%= help_requesting_path %>">Making requests</a> - Guide to effective requests</li>
+  </ul>
+
+  <p><strong>Next</strong>, read about <a href="<%= help_path(anchor: 'exemptions') %>">exemptions and refusals</a> --&gt;</p>
+
+  <div id="hash_link_padding"></div>
+</div>

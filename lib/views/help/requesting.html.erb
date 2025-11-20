@@ -32,7 +32,7 @@
 
     <dd>
       <p>Please <a href="<%= new_change_request_path %>">contact us</a> with the name of the public authority and,
-        if you can find it, their contact email address for Freedom of Information requests.
+        if you can find it, their contact email address for access to information requests.
       </p>
       <p>If you'd like to help add a whole category of public authority to the site, we'd love
         to hear from you too.
@@ -40,25 +40,25 @@
 
     </dd>
 
-    <dt id="authorities">Why do you include some authorities that aren't formally subject to FOI?<a href="#authorities">#</a> </dt>
+    <dt id="authorities">Why do you include some authorities that aren't formally subject to the Code?<a href="#authorities">#</a> </dt>
 
     <dd>
       <p><%= site_name %> lets you make requests for information to a range of
         organisations:</p>
 
       <ul>
-        <li> Those formally subject to the FOI Act</li>
-        <li> Those formally subject to the Environmental Regulations (a less well
-          defined group)</li>
-        <li> Those which voluntarily comply with the FOI Act</li>
-        <li> Those which aren't subject to the Act but we think should be, on grounds
-          such as them having significant public responsibilities.
+        <li>Those formally subject to the <a href="https://www.access.gov.hk/">Code on Access to Information</a> (all Government bureaux and departments)</li>
+        <li>Agencies including the Hong Kong Monetary Authority, Independent Commission Against Corruption, Hong Kong Housing Authority, and Privacy Commissioner for Personal Data</li>
+        <li>Courts and tribunals administrative offices</li>
+        <li>Those which voluntarily comply with the Code</li>
+        <li>Those which aren't subject to the Code but we think should be, on grounds
+          such as them having significant public responsibilities
         </li>
       </ul>
 
-      <p>In the last case, we're using the site to lobby for expansion of the
-        scope of the FOI Act. Even if an organisation is not legally obliged to respond
-        to an FOI request, they can still do so voluntarily.
+      <p>In the last case, we're using the site to advocate for expansion of the
+        scope of the Code. Even if an organisation is not formally obliged to respond
+        under the Code, they can still do so voluntarily.
       </p>
 
     </dd>
@@ -86,10 +86,10 @@
       </p>
 
       <p>
-        If you want information to support an argument or campaign, Freedom of
-        Information is a powerful tool. Although you may not use this site to
+        If you want information to support an argument or campaign, access to
+        information is a powerful tool. Although you may not use this site to
         run your campaign, we encourage you to use it to get the information you
-        need. We also encourage to run your campaign elsewhere - one effective
+        need. We also encourage you to run your campaign elsewhere - one effective
         and very easy way is to <%= link_to 'start your own blog',
           "http://wordpress.com/"%>.
         <% if AlaveteliConfiguration::enable_annotations %>
@@ -105,22 +105,18 @@
 
     <dd>
 
-      <p>Making an FOI request is nearly always free.</p>
+      <p>Making a request under the Code on Access to Information is free. However, you may need to pay for photocopying costs if you receive a large amount of information.</p>
 
-      <p>Authorities often include unnecessary, scary, boilerplate in
-        acknowledgement messages saying they "may" charge a fee. Ignore such notices.
-        They hardly ever will actually charge a fee.  If they do, they can only charge you if
-        you have specifically agreed in advance to pay.  <a
-        href="http://www.ico.gov.uk/upload/documents/library/freedom_of_information/practical_application/chargingafee.pdf">More
-        details</a> from the Information Commissioner.
+      <p>Under the Code, departments may charge the prevailing standard photocopying charges:
+        <ul>
+          <li><strong>HK$1.5 per A4 page</strong></li>
+          <li><strong>HK$1.6 per A3 page</strong></li>
+        </ul>
       </p>
 
-      <p>Sometimes an authority will refuse your request, saying that the cost
-        of handling it exceeds £600 (for central government) or £450 (for all other
-        public authorities). At this point you can refine your
-        request. e.g. it would be much cheaper for an authority to tell you the amount
-        spent on marshmallows in the past year than in the past ten years.
-      </p>
+      <p>Information will not be released until the requisite payment has been made. Departments should inform you in advance if charges will apply and obtain your agreement before proceeding.</p>
+
+      <p>If you're concerned about costs, you can refine your request to be more specific, which may reduce the amount of material that needs to be copied.</p>
 
     </dd>
 
@@ -129,18 +125,20 @@
     <dt id="quickly_response">How quickly will I get a response? <a href="#quickly_response">#</a> </dt>
 
     <dd>
-      <p>By law, public authorities must respond <strong>promptly</strong> to
-        requests.
+      <p>Under the <a href="https://www.access.gov.hk/">Code on Access to Information</a>, departments must respond <strong>promptly</strong> to requests.
       </p>
 
-      <p>Even if they are not prompt, in nearly all cases they must respond within
-        20 working days. If you had to clarify your request, or they are a school,
-        or one or two other cases, then they may have more time
-        (<a href="<%= help_officers_path(:anchor => 'days') %>">full details</a>).
+      <p>The timeline for responses (measured in <strong>calendar days</strong>, not working days):
       </p>
-      <p><%= site_name %> will email you if you don't get a timely response.  You can
-        then send the public authority a message to remind them, and tell them if they
-        are breaking the law.</p>
+      <ul>
+        <li><strong>10 calendar days:</strong> You should receive either the information or an interim reply explaining why more time is needed</li>
+        <li><strong>21 calendar days:</strong> This is the target time for providing the information</li>
+        <li><strong>51 calendar days:</strong> Maximum time in exceptional circumstances (departments must explain the need for an extension)</li>
+      </ul>
+
+      <p><%= site_name %> will email you if you don't get a timely response. You can
+        then send the department a message to remind them, and point out that they
+        should comply with the Code on Access to Information.</p>
 
     </dd>
 
@@ -156,10 +154,10 @@
         <li>If they have not received it, the problem is most likely due to
           "spam filters". Refer the authority to the measures in the answer
           '<a href="<%= help_officers_path(:anchor => 'spam_problems') %>">I can see a request on <%= site_name %>, but we never got it by email!</a>'
-          in the FOI officers section of this help.
+          in the access to information officers section of this help.
         </li>
         <li>If you're still having no luck, then you can ask for an internal review,
-          and then complain to the Information Commissioner about the authority.
+          and then complain to The Ombudsman about the authority.
           Read our page '<a href="<%= help_general_path(:template => 'unhappy') %>">Unhappy about the response you got?</a>'.
       </ul>
     </dd>
@@ -171,45 +169,49 @@
 
     <dt id="reuse">It says I can't re-use the information I got!<a href="#reuse">#</a> </dt>
     <dd>
-      <p>Authorities often add legal boilerplate about the
-        "<a href="http://www.opsi.gov.uk/si/si2005/20051515">Re-Use of Public Sector
-          Information Regulations 2005</a>", which at first glance implies you may not
-        be able do anything with the information.
+      <p>Authorities may add statements about copyright or restrictions on re-use of information.
       </p>
 
       <p>You can, of course, write articles about the information or summarise it, or
-        quote parts of it. We also think you should feel free to republish the
-        information in full, just as we do, even though in theory you might not be
-        allowed to do so.  See <a href="<%= help_officers_path(:anchor => 'copyright') %>">our policy on copyright</a>.</p>
+        quote parts of it. We believe that government information should be freely available
+        for republication, as we do on this site, to promote transparency and accountability.</p>
+
+      <p>If you have specific questions about copyright restrictions, you may wish to seek
+        legal advice or contact the department directly for clarification.</p>
 
     </dd>
 
-    <dt id="ico_help">Can you tell me more of the nitty gritty about the process of making requests? <a href="#ico_help">#</a> </dt>
+    <dt id="code_details">Can you tell me more about the Code on Access to Information? <a href="#code_details">#</a> </dt>
 
     <dd>
-      <p>Have a look at the
-        <a href="http://www.ico.gov.uk/for_the_public/access_to_official_information.aspx">access to official information</a>
-        pages on the Information Commissioner's website.</p>
+      <p>The Code on Access to Information was introduced in 1995 and is an <strong>administrative code</strong>, not legislation. This means:
+      </p>
 
-      <p>If you're requesting information from a Scottish public authority,
-        the process is very similar. There are differences around time
-        limits for compliance.
-        See the <a href="http://www.itspublicknowledge.info/nmsruntime/saveasdialog.asp?lID=1858&amp;sID=321">Scottish
-          Information Commissioner's guidance</a> for details.</p>
+      <ul>
+        <li>It establishes procedures and expectations for government departments</li>
+        <li>Compliance is administrative rather than legally enforceable</li>
+        <li>Appeals go to The Ombudsman (申訴專員), not to courts</li>
+        <li>There is no statutory right to information as in some other jurisdictions</li>
+      </ul>
+
+      <p>You can find the full text of the Code and guidelines at the
+        <a href="https://www.access.gov.hk/">official Code on Access to Information website</a> (available in English and Chinese).</p>
+
+      <p>Part 2 of the Code lists the <a href="https://www.access.gov.hk/en/codeonacctoinfo/part2.html">exemptions and refusal categories</a> that departments may use to withhold information.</p>
+
     </dd>
 
     <dt id="data_protection">Can I request information about myself? <a href="#data_protection">#</a> </dt>
 
     <dd>
-      <p>No. Requests made using <%= site_name %> are public, made under the Freedom of
-        Information Act, and cannot help you find information about a private
+      <p>No. Requests made using <%= site_name %> are public, made under the Code on Access to
+        Information, and cannot help you find information about a private
         individual.</p>
 
-      <p>If you would like to know what information a public
-        authority holds about yourself, you should make a "Subject Access Request" in
-        private using Data Protection law.  The leaflet "<a
-        href="http://www.ico.gov.uk/upload/documents/library/data_protection/introductory/subject_access_rights.pdf">How to access your information</a>" (on the Information Commissioner's
-        website) explains how to do this.</p>
+      <p>If you would like to know what personal data a public authority or private
+        organisation holds about yourself, you should make a "Data Access Request" in
+        private under Hong Kong's <a href="https://www.pcpd.org.hk/">Personal Data (Privacy) Ordinance</a>.
+        You can find guidance on the <a href="https://www.pcpd.org.hk/english/data_access_request/data_access_request.html">Privacy Commissioner's website</a>.</p>
 
       <p>If you see that somebody has included personal information, perhaps
         unwittingly, in a request, please <a href="<%= help_contact_path %>">contact us</a>
@@ -223,34 +225,12 @@
         responses that we receive are automatically published on the website for anyone
         to read.  </p>
       <p>You should contact the public authority directly if you would like to
-        make a request in private.  If you're interested in buying a system which helps
-        you manage FOI requests in secret, then <a href="<%= help_contact_path %>">contact us</a>.
+        make a request in private. If you're interested in a system which helps
+        you manage access to information requests privately, then <a href="<%= help_contact_path %>">contact us</a>.
       </p>
     </dd>
 
-    <dt id="eir">Why can I only request information about the environment from some authorities? <a href="#eir">#</a> </dt>
-
-    <dd>
-      <p>Some public authorities, such as <a href="https://www.whatdotheyknow.com/body/south_east_water">South East Water</a>,
-        don't come under the Freedom of Information Act, but do come under another law called
-        the Environmental Information Regulations (EIR).
-      </p>
-
-      <p>It's a very similar law, so you make a request
-        to them using <%= site_name %> in just the same way as an FOI request. The only
-        difference is that on the page where you write your request, it reminds you
-        that you can only request "environmental information" and tells you what that
-        means. It is quite broad.
-      </p>
-
-      <p>You can, of course, request environmental information from other
-        authorities. Just make a Freedom of Information (FOI) request as normal. The
-        authority has a duty to work out if the Environmental Information Regulations
-        (EIR) is the more appropriate legislation to reply under.
-      </p>
-    </dd>
-
-    <dt id="multiple">Can I make the same to request to lots of authorities, e.g. all councils? <a href="#multiple">#</a> </dt>
+    <dt id="multiple">Can I make the same request to lots of authorities, e.g. all bureaux? <a href="#multiple">#</a> </dt>
 
     <dd>We ask you to first send a test version of your request to a few
       authorities. Their responses will help you improve the wording of your request,
@@ -263,7 +243,7 @@
     <dt id="offsite">I made a request off the site, how do I upload it to the archive?<a href="#offsite">#</a> </dt>
 
     <dd><%= site_name %> is an archive of requests made through the site,
-      and does not try to be an archive of all FOI requests. We'll never support uploading
+      and does not try to be an archive of all access to information requests. We'll never support uploading
       other requests. For one thing, we wouldn't be able to verify that other
       responses actually came from the authority. If this really matters to you,
       you can always make the same request again via <%= site_name %>.

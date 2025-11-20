@@ -1,4 +1,4 @@
-<% @title = "Unhappy about a Freedom of Information request?" %>
+<% @title = "Unhappy about an access to information request?" %>
 
 
 <% if @info_request %>
@@ -12,16 +12,16 @@
 <p>If ...</p>
 
 <ul>
-  <li>You didn't get a reply within 20 working days</li>
+  <li>You didn't get a reply within 10 calendar days (or an interim reply within 10 days and final response within 21 days)</li>
   <li>You did not get all of the information that you requested <strong>or</strong></li>
-  <li>Your request was refused, but without a reason valid under the law</li>
+  <li>Your request was refused, but without a reason valid under the <a href="https://www.access.gov.hk/en/codeonacctoinfo/part2.html">Code on Access to Information (Part 2)</a></li>
 </ul>
 
 <p>... you can</p>
 
 <ol>
-  <li>Ask for an <strong>internal review</strong> at the public authority.</li>
-  <li>If that doesn't help, complain to the <strong>Information Commissioner</strong>.</li>
+  <li>Ask for an <strong>internal review</strong> by a senior officer at the department.</li>
+  <li>If that doesn't help, complain to <strong>The Ombudsman</strong>.</li>
   <li>Either way, also <strong>use other means</strong> to answer your question.</li>
 </ol>
 
@@ -29,7 +29,7 @@
 
 <p>
   <% if @info_request %>
-    <%= link_to "Request an internal review", new_request_followup_path(@info_request.url_title, internal_review: '1', anchor: 'followup'), :class => 'link_button_green request-internal-review-action' %> and then write a message asking the authority to review your request.
+    <%= link_to "Request an internal review", new_request_followup_path(@info_request.url_title, internal_review: '1', anchor: 'followup'), :class => 'link_button_green request-internal-review-action' %> and then write a message asking the department to review your request.
   <% else %>
     At the bottom of the relevant request page on <%= site_name %> choose
     "request an internal review". Then write a message asking for an internal
@@ -38,79 +38,94 @@
   <% end %>
 </p>
 
-<p>Internal reviews should be quick. If one takes longer than 20 working days
-  then the authority should write and let you know, and it should never take
-  longer than 40 working days (see this
-  <a href="http://www.ico.gov.uk/upload/documents/library/freedom_of_information/detailed_specialist_guides/foi_good_practice_guidance_5.pdf">good
-    practice guide</a>).
-  You will then either get the information that
+<p>Internal reviews under the Code on Access to Information should be conducted by a directorate officer
+  at least one rank senior to the officer who made the original decision. The department should respond
+  to your review request promptly. You will then either get the information that
   you originally requested, or you will be told that the review upholds the
-  original decision.
+  original decision with reasons.
 </p>
 
-<h1 id="complaining">2. Complaining to the Information Commissioner <a class="hover_a" href="#complaining">#</a> </h1>
+<p><strong>Important:</strong> When requesting an internal review, clearly state why you believe the
+  original decision was incorrect. Reference specific provisions of the
+  <a href="https://www.access.gov.hk/">Code on Access to Information</a> where relevant.</p>
 
-<p>If you are still unhappy after the public authority has done their internal review,
-  then you can complain to the Information Commissioner. To do this read
-  <a href="http://www.ico.gov.uk/complaints/freedom_of_information.aspx">Complaints about Freedom of Information</a>
-  on the Information Commissioner's website. If you requested information from a Scottish
-  authority, then  <a href="http://www.itspublicknowledge.info/YourRights/HowToAppeal/Appeal.asp">appeal
-    to the Scottish Information Commissioner</a>.
-</p>
+<h1 id="complaining">2. Complaining to The Ombudsman <a class="hover_a" href="#complaining">#</a> </h1>
 
-<p>To make it easier to send the relevant information to the
-  Information Commissioner, either
-  <% if @info_request %>
-    include a link to your request
-    <strong><%=h request_url(@info_request) %></strong>
-  <% else %>
-    include a link to your request on <%= site_name %>
-<% end %>
-in your complaint or print out the whole page of your request and all attachments.
-</p>
+<p>If you are still unhappy after the department has completed their internal review,
+  you can lodge a complaint with <strong>The Ombudsman</strong> (申訴專員). The Ombudsman
+  investigates complaints about non-compliance with the Code on Access to Information by
+  Hong Kong government departments and public bodies.</p>
+
+<p>To lodge a complaint with The Ombudsman:</p>
+
+<ul>
+  <li>Visit <a href="https://www.ombudsman.hk/">The Ombudsman's website</a> (available in English and Chinese)</li>
+  <li>Complete the <a href="https://www.ombudsman.hk/howtocomplain/">complaint form</a></li>
+  <li>Provide details of your original request, the department's response, and the internal review outcome</li>
+  <li>
+    <% if @info_request %>
+      Include a link to your request: <strong><%=h request_url(@info_request) %></strong>
+    <% else %>
+      Include a link to your request on <%= site_name %>
+    <% end %>
+  </li>
+</ul>
+
+<p><strong>Note:</strong> The Ombudsman handles administrative complaints. Unlike jurisdictions with
+  Freedom of Information laws, Hong Kong's Code on Access to Information is an administrative code
+  (not legislation), so there is no legal appeal to courts or tribunals. The Ombudsman's investigation
+  and recommendations are the primary external oversight mechanism.</p>
 
 <p><%= site_name %> has no special facilities for handling a request at this stage - it
-  passes into the Information Commissioner's system. You can leave annotations on your
+  passes into The Ombudsman's system. You can leave annotations on your
   request keeping people informed of progress.</p>
-
-<p>A warning. There is a backlog of work at the Information Commissioner, and
-  it can take literally years to get resolution from them. If you reach this point,
-  you should accept that you won't get the information quickly by this means. Maybe
-  you want to help the fight to improve Freedom of Information, or maybe
-  getting the information slowly is still worthwhile. You can also try and
-  get the information by <strong>other means...</strong></p>
 
 <h1 id="other_means">3. Using other means to answer your question <a class="hover_a" href="#other_means">#</a> </h1>
 
-<p>You can try persuing your problem or your research in other ways.</p>
+<p>You can try pursuing your problem or your research in other ways.</p>
 
 <ul>
-  <li>Make a <strong>new FOI request</strong> for summary information, or for
+  <li>Make a <strong>new access to information request</strong> for summary information, or for
     documentation relating indirectly to matters in your refused request.
     <a href="<%= help_contact_path %>">Ask us for ideas</a> if you're stuck.</li>
-  <li>If any <strong>other public authorities</strong> or publicly owned companies are involved,
-    then make FOI requests to them.</li>
-  <li>Write to <strong>your MP</strong> or other politician using <a
-       href="http://www.writetothem.com">WriteToThem</a> and ask for their help
-     finding the answer. MPs can write directly to ministers or departments, and
-     can ask written questions in the House of Commons. Councillors in local authorities
-     can talk directly to council officers.</li>
-  <% if can_ask_the_eu?(@country_code) %>
-    <li>
-      Try <%= link_to 'asking for the information from the European Union',
-      'http://www.asktheeu.org' %>. Every one of the 500 million people
-      living in the European Union (both citizens and residents) has the
-      legally guaranteed right to ask for information from EU authorities.
-      <%= link_to 'Ask The EU', 'http://www.asktheeu.org' %> is a version of
-      this website for the European Union.
-    </li>
-  <% end %>
+  <li>If any <strong>other government departments</strong> or public bodies are involved,
+    make requests to them. Sometimes information refused by one department may be
+    available from another.</li>
+  <li>Contact <strong>your Legislative Council (LegCo) member</strong> and ask for their help
+    finding the answer. LegCo members can ask questions to government officials and raise
+    issues through parliamentary procedures. You can find your geographical constituency member
+    or contact functional constituency members relevant to your topic.</li>
+  <li>Check if the information is already available in <strong>government disclosure logs</strong>
+    or proactive publications. Some departments maintain disclosure logs of previously released
+    information on their websites.</li>
   <li>Ask <strong>other researchers</strong> who are interested in a similar
-    issue to yours for ideas. You can sometimes find them by browsing this site;
-    contact any registered user from their page. There may be an Internet
-    forum or group that they hang out in. If it is a local matter, use <a
-       href="http://www.groupsnearyou.com">GroupsNearYou</a> to find such a
-     forum.</li>
-  <li>You could form a small local campaign group and arrange a meeting
-    with staff from the authority.</li>
+    issue to yours for ideas. You can sometimes find them by browsing this site and
+    contacting any registered user from their page.</li>
+  <li>Consider working with <strong>civil society organizations</strong>, journalists, or
+    academics who may have experience obtaining similar information or could collaborate
+    on your research.</li>
+  <li>You could form a small campaign group to raise public awareness about the issue
+    and arrange meetings with departmental staff.</li>
 </ul>
+
+<h1 id="timelines">Understanding Hong Kong's response timelines <a class="hover_a" href="#timelines">#</a> </h1>
+
+<p>Under the Code on Access to Information, departments should follow these timelines
+  (measured in <strong>calendar days</strong>, not working days):</p>
+
+<ul>
+  <li><strong>10 calendar days:</strong> Initial response with information, or an interim reply
+    explaining why more time is needed</li>
+  <li><strong>21 calendar days:</strong> Target completion time for providing the information</li>
+  <li><strong>51 calendar days:</strong> Maximum time in exceptional circumstances (departments
+    must explain why an extension is needed, and extensions should be kept to a minimum)</li>
+</ul>
+
+<p>If a department takes longer than these timeframes without explanation, you have grounds
+  to request an internal review or complain to The Ombudsman.</p>
+
+<p><strong>Learn more:</strong> Read about the <a href="<%= help_path(anchor: 'timelines') %>">detailed
+  timeline requirements</a> and <a href="https://www.access.gov.hk/en/codeonacctoinfo/part2.html">valid
+  exemptions under Part 2</a> of the Code.</p>
+
+<div id="hash_link_padding"></div>

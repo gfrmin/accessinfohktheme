@@ -1,0 +1,51 @@
+Dear <%= @info_request.user_name %>,
+
+Your request for information to <%= @info_request.public_body.name %> has now SIGNIFICANTLY EXCEEDED the maximum response time under Hong Kong's Code on Access to Information.
+
+Request: <%= @info_request.title %>
+Submitted: <%= simple_date(@info_request.created_at) %>
+Days elapsed: <%= ((Time.now - @info_request.created_at) / 1.day).floor %> calendar days
+
+⚠️ IMPORTANT: Under the Code on Access to Information, the maximum processing time should not normally exceed 51 calendar days, even in exceptional circumstances. Your request has exceeded this maximum without a satisfactory response.
+
+RECOMMENDED ACTIONS:
+
+1. REQUEST AN INTERNAL REVIEW (if not done already)
+   Contact the department and request an internal review of your request by a directorate officer at least one rank senior to the original decision-maker:
+   <%= new_request_followup_url(@info_request.url_title, internal_review: '1') %>
+
+2. COMPLAIN TO THE OMBUDSMAN
+   You should consider lodging a formal complaint with The Ombudsman (申訴專員) about non-compliance with the Code on Access to Information:
+
+   The Ombudsman
+   Website: https://www.ombudsman.hk/
+   Email: complaints@ombudsman.hk
+   Phone: (852) 2629 0555
+
+   When lodging your complaint:
+   - Reference your request on <%= site_name %>: <%= request_url(@info_request) %>
+   - Explain that the department has exceeded the 51-day maximum
+   - Attach any correspondence showing the department's delays or lack of response
+
+3. CONTACT YOUR LEGISLATIVE COUNCIL MEMBER
+   You may wish to raise this issue with your LegCo member to highlight systemic problems with access to information in Hong Kong:
+   https://www.legco.gov.hk/general/english/members/yr16-20/mem.htm
+
+4. REFINE YOUR REQUEST
+   Sometimes a more specific or narrowly-focused request may get a faster response:
+   <%= new_request_to_body_url(url_name: @info_request.public_body.url_name) %>
+
+About the Code on Access to Information:
+
+The Code is an administrative code (not legislation) introduced in 1995. While departments are expected to comply, there is no statutory right to information or legal enforcement mechanism. The Ombudsman's oversight and public scrutiny remain the primary means of ensuring compliance.
+
+For detailed guidance on the appeals process, visit:
+<%= help_unhappy_url %>
+
+Best regards,
+<%= pro_site_name %>
+
+---
+You are receiving this email because you made a request through <%= site_name %>.
+This is an important alert about a significantly overdue request.
+To manage your email preferences, visit: <%= user_url(@info_request.user) %>

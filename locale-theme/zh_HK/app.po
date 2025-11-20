@@ -1,0 +1,199 @@
+# Traditional Chinese (Hong Kong) translations for AccessInfoHK theme
+# This file contains translations specific to the Hong Kong theme customizations
+# Core Alaveteli translations come from the main Transifex project
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AccessInfoHK Theme\n"
+"Report-Msgid-Bugs-To: \n"
+"Language: zh_HK\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# Custom request statuses
+msgid "Internal review pending."
+msgstr "內部覆核待處理。"
+
+msgid "Complaint lodged with The Ombudsman."
+msgstr "已向申訴專員公署提出投訴。"
+
+msgid "Interim reply received, awaiting final response."
+msgstr "已收到中期回覆，正等待最終回覆。"
+
+msgid "Payment required for photocopying charges."
+msgstr "需要支付影印費用。"
+
+msgid "Response time exceeded 21 calendar days."
+msgstr "回覆時間已超過21個曆日。"
+
+msgid "Transferred to another Hong Kong government department."
+msgstr "已轉交香港政府另一部門處理。"
+
+# Status descriptions
+msgid "You have requested an internal review. The department should have this reviewed by a directorate officer at least one rank senior to the officer who made the original decision."
+msgstr "你已要求進行內部覆核。部門應由至少高於作出原決定的人員一級的首長級人員進行覆核。"
+
+msgid "You have indicated that you've complained to The Ombudsman. They will investigate whether the department properly complied with the Code on Access to Information."
+msgstr "你已表示向申訴專員公署提出投訴。他們將調查部門是否適當遵守《公開資料守則》。"
+
+msgid "The department sent an interim reply. Under the Code, they should provide the information within 21 calendar days of your original request, or up to 51 days in exceptional circumstances with explanation."
+msgstr "部門已發出中期回覆。根據《守則》，他們應在你原來提出要求後的21個曆日內提供資料，或在特殊情況下並提供解釋的情況下，最多51個曆日內提供資料。"
+
+msgid "The department has indicated that photocopying charges apply (HK$1.5 per A4 page, HK$1.6 per A3 page). Information will not be released until payment is made."
+msgstr "部門已表示需要收取影印費用（每張A4紙1.5港元，每張A3紙1.6港元）。在付款前不會發放資料。"
+
+msgid "This request has exceeded the 21 calendar day target response time without explanation. You may wish to send a reminder or request an internal review."
+msgstr "此要求已超過21個曆日的目標回覆時間而沒有解釋。你可能希望發送提醒或要求進行內部覆核。"
+
+msgid "Your request has been transferred to another Hong Kong government department. The receiving department should handle your request under the Code on Access to Information."
+msgstr "你的要求已轉交至香港政府另一部門。接收部門應根據《公開資料守則》處理你的要求。"
+
+# Hong Kong-specific terminology
+msgid "Code on Access to Information"
+msgstr "公開資料守則"
+
+msgid "The Ombudsman"
+msgstr "申訴專員"
+
+msgid "Hong Kong government"
+msgstr "香港政府"
+
+msgid "calendar days"
+msgstr "曆日"
+
+msgid "working days"
+msgstr "工作日"
+
+msgid "internal review"
+msgstr "內部覆核"
+
+msgid "Data Guru LLC"
+msgstr "Data Guru LLC"
+
+msgid "Public Data Market"
+msgstr "Public Data Market"
+
+msgid "access to information"
+msgstr "查閱資料"
+
+msgid "Access to Information Officer"
+msgstr "查閱資料主任"
+
+msgid "photocopying charges"
+msgstr "影印費用"
+
+msgid "exemptions"
+msgstr "豁免條款"
+
+msgid "public interest test"
+msgstr "公眾利益測試"
+
+# Request-related terms
+msgid "Make and browse Freedom of Information (FOI) requests"
+msgstr "提出及瀏覽查閱資料要求"
+
+msgid "Freedom of Information"
+msgstr "資訊自由"
+
+msgid "FOI request"
+msgstr "查閱資料要求"
+
+msgid "access to information request"
+msgstr "查閱資料要求"
+
+msgid "government department"
+msgstr "政府部門"
+
+msgid "government bureau"
+msgstr "政府決策局"
+
+msgid "public authority"
+msgstr "公共機構"
+
+msgid "public body"
+msgstr "公共機構"
+
+# Help page terms
+msgid "Response timelines"
+msgstr "回覆時限"
+
+msgid "Exemptions explained"
+msgstr "豁免條款說明"
+
+msgid "Photocopying charges"
+msgstr "影印費用"
+
+msgid "For access to information officers"
+msgstr "給查閱資料主任的資訊"
+
+msgid "Unhappy with a response?"
+msgstr "對回覆不滿意？"
+
+msgid "Making requests"
+msgstr "提出要求"
+
+msgid "Your privacy"
+msgstr "你的私隱"
+
+# Legislative Council
+msgid "Legislative Council"
+msgstr "立法會"
+
+msgid "LegCo"
+msgstr "立法會"
+
+msgid "LegCo member"
+msgstr "立法會議員"
+
+# Privacy-related
+msgid "Personal Data (Privacy) Ordinance"
+msgstr "個人資料（私隱）條例"
+
+msgid "Privacy Commissioner"
+msgstr "私隱專員"
+
+msgid "Data Access Request"
+msgstr "查閱資料要求"
+
+# Department names (common ones)
+msgid "Immigration Department"
+msgstr "入境事務處"
+
+msgid "Transport Department"
+msgstr "運輸署"
+
+msgid "Hong Kong Monetary Authority"
+msgstr "香港金融管理局"
+
+msgid "Independent Commission Against Corruption"
+msgstr "廉政公署"
+
+msgid "Hong Kong Housing Authority"
+msgstr "香港房屋委員會"
+
+# Time-related
+msgid "10 calendar days"
+msgstr "10個曆日"
+
+msgid "21 calendar days"
+msgstr "21個曆日"
+
+msgid "51 calendar days"
+msgstr "51個曆日"
+
+msgid "target response time"
+msgstr "目標回覆時間"
+
+msgid "interim reply"
+msgstr "中期回覆"
+
+msgid "final response"
+msgstr "最終回覆"
+
+# Error messages
+msgid "unknown status "
+msgstr "未知狀態 "
+
+msgid "unknown calculate_status "
+msgstr "未知的計算狀態 "

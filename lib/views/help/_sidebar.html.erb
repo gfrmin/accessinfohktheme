@@ -3,8 +3,12 @@
 <ul class="no_bullets">
   <li><%= link_to_unless_current "Introduction", help_about_path %></li>
   <li><%= link_to_unless_current "Making requests", help_requesting_path %></li>
+  <li><%= link_to_unless_current "Unhappy with a response?", help_general_path(template: 'unhappy') %></li>
+  <li><%= link_to_unless_current "Response timelines", help_general_path(template: 'timelines') %></li>
+  <li><%= link_to_unless_current "Exemptions explained", help_general_path(template: 'exemptions') %></li>
+  <li><%= link_to_unless_current "Photocopying charges", help_general_path(template: 'payments') %></li>
   <li><%= link_to_unless_current "Your privacy", help_privacy_path %></li>
-  <li><%= link_to_unless_current "FOI officers", help_officers_path %></li>
+  <li><%= link_to_unless_current "For access to information officers", help_officers_path %></li>
   <li><%= link_to_unless_current "About the software", help_alaveteli_path %></li>
   <li><%= link_to_unless_current "Credits", help_credits_path %></li>
   <li><%= link_to_unless_current "Programmers API", help_api_path %></li>

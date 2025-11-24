@@ -31,7 +31,7 @@ module InfoRequestCustomStates
 
   # Helper method: Check if we received an interim reply but no final response
   def has_interim_reply_without_final?
-    return false unless self.awaiting_response
+    return false unless described_state == 'waiting_response'
 
     # Look for interim reply messages in correspondence
     interim_reply_keywords = ['interim reply', '中期回覆', 'more time', '需要更多時間',
@@ -50,7 +50,7 @@ module InfoRequestCustomStates
 
   # Helper method: Check if request exceeded 21 days without explanation
   def exceeds_target_time_without_explanation?
-    return false unless self.awaiting_response
+    return false unless described_state == 'waiting_response'
 
     days_elapsed = (Time.now - self.created_at) / 1.day
     return false if days_elapsed <= 21

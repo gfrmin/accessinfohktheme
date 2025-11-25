@@ -8,17 +8,22 @@ describe 'AccessInfoHK Theme' do
   describe 'Custom Request States' do
 
     describe 'theme_extra_states' do
-      it 'includes all Hong Kong-specific states' do
+      it 'includes all Hong Kong-specific manually-settable states' do
         expect(InfoRequest.theme_extra_states).to include('internal_review_pending')
         expect(InfoRequest.theme_extra_states).to include('ombudsman_complaint')
-        expect(InfoRequest.theme_extra_states).to include('interim_reply_received')
         expect(InfoRequest.theme_extra_states).to include('payment_required')
-        expect(InfoRequest.theme_extra_states).to include('exceeds_21_days')
         expect(InfoRequest.theme_extra_states).to include('transferred_hk')
       end
 
-      it 'returns exactly 6 custom states' do
-        expect(InfoRequest.theme_extra_states.length).to eq(6)
+      it 'does not include calculated statuses' do
+        # interim_reply_received and exceeds_21_days are calculated by theme_calculate_status
+        # and should NOT be in theme_extra_states (which is for manually settable states)
+        expect(InfoRequest.theme_extra_states).not_to include('interim_reply_received')
+        expect(InfoRequest.theme_extra_states).not_to include('exceeds_21_days')
+      end
+
+      it 'returns exactly 4 custom states' do
+        expect(InfoRequest.theme_extra_states.length).to eq(4)
       end
     end
 
@@ -49,6 +54,36 @@ describe 'AccessInfoHK Theme' do
 
       it 'raises error for unknown status' do
         expect { InfoRequest.theme_display_status('unknown_status') }.to raise_error(RuntimeError, /unknown status/)
+      end
+    end
+
+    describe 'theme_short_description' do
+      it 'returns correct short description for internal_review_pending' do
+        expect(InfoRequest.theme_short_description('internal_review_pending')).to eq("Internal review pending")
+      end
+
+      it 'returns correct short description for ombudsman_complaint' do
+        expect(InfoRequest.theme_short_description('ombudsman_complaint')).to eq("Ombudsman complaint")
+      end
+
+      it 'returns correct short description for interim_reply_received' do
+        expect(InfoRequest.theme_short_description('interim_reply_received')).to eq("Interim reply received")
+      end
+
+      it 'returns correct short description for payment_required' do
+        expect(InfoRequest.theme_short_description('payment_required')).to eq("Payment required")
+      end
+
+      it 'returns correct short description for exceeds_21_days' do
+        expect(InfoRequest.theme_short_description('exceeds_21_days')).to eq("Exceeds 21 days")
+      end
+
+      it 'returns correct short description for transferred_hk' do
+        expect(InfoRequest.theme_short_description('transferred_hk')).to eq("Transferred")
+      end
+
+      it 'raises error for unknown status' do
+        expect { InfoRequest.theme_short_description('unknown_status') }.to raise_error(RuntimeError, /unknown status/)
       end
     end
 

@@ -90,15 +90,36 @@ module InfoRequestCustomStates
     end
 
     # Return the list of custom statuses added by the theme
+    # Note: Only include statuses that users can MANUALLY SET via classification form.
+    # Calculated statuses (interim_reply_received, exceeds_21_days) are handled by
+    # theme_calculate_status and should NOT be in this list.
     def theme_extra_states
       return [
         'internal_review_pending',    # User requested internal review by senior officer
         'ombudsman_complaint',         # Complaint lodged with Ombudsman
-        'interim_reply_received',      # Received 10-day interim reply, waiting for final
         'payment_required',            # Awaiting payment for photocopying charges
-        'exceeds_21_days',            # Exceeded 21-day target without explanation
         'transferred_hk'               # Request transferred between HK departments
       ]
+    end
+
+    # Return short description for custom statuses (used in listings)
+    def theme_short_description(status)
+      case status
+      when 'internal_review_pending'
+        _("Internal review pending")
+      when 'ombudsman_complaint'
+        _("Ombudsman complaint")
+      when 'interim_reply_received'
+        _("Interim reply received")
+      when 'payment_required'
+        _("Payment required")
+      when 'exceeds_21_days'
+        _("Exceeds 21 days")
+      when 'transferred_hk'
+        _("Transferred")
+      else
+        raise _("unknown status {{status}}", status: status)
+      end
     end
 
   end

@@ -30,7 +30,26 @@ msgstr "回覆時間已超過21個曆日。"
 msgid "Transferred to another Hong Kong government department."
 msgstr "已轉交香港政府另一部門處理。"
 
-# Status descriptions
+# Status descriptions (for _custom_state_descriptions partial - HTML formatted)
+msgid "You have requested an <strong>internal review</strong>. Under the Code on Access to Information, a directorate officer at least one rank senior to the officer who made the original decision should review the refusal. The department should complete this review within 30 calendar days."
+msgstr "你已要求進行<strong>內部覆核</strong>。根據《公開資料守則》，至少高於作出原決定的人員一級的首長級人員應覆核該拒絕。部門應在30個曆日內完成此覆核。"
+
+msgid "A <strong>complaint has been lodged with The Ombudsman</strong>. The Ombudsman will investigate whether the department has properly complied with the Code on Access to Information."
+msgstr "<strong>已向申訴專員公署提出投訴</strong>。申訴專員將調查部門是否適當遵守《公開資料守則》。"
+
+msgid "The department has sent an <strong>interim reply</strong>. Under the Code, they should provide the information within 21 calendar days, or up to 51 days in exceptional circumstances with proper explanation."
+msgstr "部門已發出<strong>中期回覆</strong>。根據《守則》，他們應在21個曆日內提供資料，或在特殊情況下並提供適當解釋的情況下，最多51個曆日內提供資料。"
+
+msgid "<strong>Payment is required</strong> for photocopying charges (HK$1.5 per A4 page, HK$1.6 per A3 page). The information will not be released until payment is made."
+msgstr "<strong>需要支付影印費用</strong>（每張A4紙1.5港元，每張A3紙1.6港元）。在付款前不會發放資料。"
+
+msgid "This request has <strong>exceeded the 21 calendar day target</strong> response time without adequate explanation. You may wish to send a reminder or request an internal review."
+msgstr "此要求已<strong>超過21個曆日的目標</strong>回覆時間而沒有適當解釋。你可能希望發送提醒或要求進行內部覆核。"
+
+msgid "Your request has been <strong>transferred to another Hong Kong government department</strong>. The receiving department should handle your request under the Code on Access to Information."
+msgstr "你的要求已<strong>轉交至香港政府另一部門</strong>。接收部門應根據《公開資料守則》處理你的要求。"
+
+# Status descriptions (for flash messages - plain text)
 msgid "You have requested an internal review. The department should have this reviewed by a directorate officer at least one rank senior to the officer who made the original decision."
 msgstr "你已要求進行內部覆核。部門應由至少高於作出原決定的人員一級的首長級人員進行覆核。"
 

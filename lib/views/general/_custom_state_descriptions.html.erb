@@ -1,0 +1,16 @@
+<%# Custom state descriptions for Hong Kong Code on Access to Information %>
+<% if status == 'internal_review_pending' %>
+  <%= _('You have requested an <strong>internal review</strong>. Under the Code on Access to Information, a directorate officer at least one rank senior to the officer who made the original decision should review the refusal. The department should complete this review within 30 calendar days.') %>
+<% elsif status == 'ombudsman_complaint' %>
+  <%= _('A <strong>complaint has been lodged with The Ombudsman</strong>. The Ombudsman will investigate whether the department has properly complied with the Code on Access to Information.') %>
+<% elsif status == 'interim_reply_received' %>
+  <%= _('The department has sent an <strong>interim reply</strong>. Under the Code, they should provide the information within 21 calendar days, or up to 51 days in exceptional circumstances with proper explanation.') %>
+<% elsif status == 'payment_required' %>
+  <%= _('<strong>Payment is required</strong> for photocopying charges (HK$1.5 per A4 page, HK$1.6 per A3 page). The information will not be released until payment is made.') %>
+<% elsif status == 'exceeds_21_days' %>
+  <%= _('This request has <strong>exceeded the 21 calendar day target</strong> response time without adequate explanation. You may wish to send a reminder or request an internal review.') %>
+<% elsif status == 'transferred_hk' %>
+  <%= _('Your request has been <strong>transferred to another Hong Kong government department</strong>. The receiving department should handle your request under the Code on Access to Information.') %>
+<% else %>
+  <% raise "unknown status " + status %>
+<% end %>

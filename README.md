@@ -37,17 +37,24 @@ This theme provides Hong Kong-specific customizations in several areas:
 
 Hong Kong-specific request statuses that reflect the unique aspects of the Code:
 
+#### Manually Settable States (via classification form)
+
 | Status | Description |
 |--------|-------------|
 | `internal_review_pending` | User requested internal review by senior officer |
 | `ombudsman_complaint` | Complaint lodged with The Ombudsman |
-| `interim_reply_received` | Received 10-day interim reply, awaiting final response (with keyword detection in both English and Chinese) |
 | `payment_required` | Awaiting payment for photocopying charges |
-| `exceeds_21_days` | Exceeded 21-day target without explanation (automatically detected) |
 | `transferred_hk` | Request transferred between HK departments |
 
+#### Automatically Calculated States (via `theme_calculate_status`)
+
+| Status | Description |
+|--------|-------------|
+| `interim_reply_received` | Received 10-day interim reply, awaiting final response (detected via keyword matching) |
+| `exceeds_21_days` | Exceeded 21-day target without explanation (detected via timeline analysis) |
+
 **Features:**
-- Automatic detection of interim replies (English and Chinese keywords)
+- Automatic detection of interim replies using bilingual keyword matching (English and Chinese)
 - Automatic flagging when 21-day target is exceeded without explanation
 - Bilingual status messages (English/Traditional Chinese)
 

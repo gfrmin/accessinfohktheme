@@ -7,6 +7,211 @@
 #
 Rails.configuration.to_prepare do
 
+  # Fix IP detection: use Cloudflare headers for real client IP
+  ApplicationController.class_eval do
+
+    def user_ip
+      request.headers['CF-Connecting-IP'] || request.remote_ip
+    rescue ActionDispatch::RemoteIp::IpSpoofAttackError
+      nil
+    end
+
+    def country_from_ip
+      cf_country = request.headers['CF-IPCountry']
+      return cf_country if cf_country.present? && cf_country != 'XX'
+      return AlaveteliGeoIP.country_code_from_ip(user_ip) if user_ip
+      AlaveteliConfiguration.iso_country_code
+    end
+
+  end
+
+  # Rate limit password reset emails (3 per hour per IP)
+  PasswordChangesController.class_eval do
+
+    def create_with_rate_limit
+      unless @user || params[:password_change_user]
+        @email_field_options = {}
+        render :new
+        return
+      end
+
+      email = @user ? @user.email : params[:password_change_user][:email]
+
+      unless MySociety::Validate.is_valid_email(email)
+        flash[:error] = _("That doesn't look like a valid email address. " \
+                          "Please check you have typed it correctly.")
+        @email_field_options =
+          @user ? { disabled: true, value: email } : {}
+        render :new
+        return
+      end
+
+      unless verify_recaptcha
+        flash.now[:error] = _('There was an error with the reCAPTCHA. Please try again.')
+        @email_field_options =
+          @user ? { disabled: true, value: email } : {}
+        render :new
+        return
+      end
+
+      password_change_ip_rate_limiter.record!(user_ip) if user_ip
+
+      if user_ip && password_change_ip_rate_limiter.limit?(user_ip)
+        logger.info "Rate limited password change from #{user_ip}"
+        render :check_email
+        return
+      end
+
+      @password_change_user = User.find_user_by_email(email)
+
+      if @password_change_user
+        post_redirect_attrs =
+          { post_params: {},
+            reason_params: \
+              { web: '',
+                email: _('Then you can change your password on {{site_name}}',
+                            site_name: site_name),
+                email_subject: _('Change your password on {{site_name}}',
+                                    site_name: site_name) },
+            circumstance: 'change_password',
+            user: @password_change_user }
+        post_redirect = PostRedirect.new(post_redirect_attrs)
+        post_redirect.uri = edit_password_change_url(post_redirect.token,
+                                                     @pretoken_hash)
+        post_redirect.save!
+
+        url = confirm_url(email_token: post_redirect.email_token)
+        begin
+          UserMailer.
+            confirm_login(@password_change_user, post_redirect.reason_params, url).
+              deliver_now
+        rescue *OutgoingMessage.expected_send_errors => e
+          logger.warn "Failed to send password change email to " \
+                      "#{@password_change_user.id}: #{e.class} #{e.message}"
+        end
+      end
+
+      render :check_email
+    end
+
+    alias_method :create_without_rate_limit, :create
+    alias_method :create, :create_with_rate_limit
+
+    private
+
+    def password_change_ip_rate_limiter
+      @password_change_ip_rate_limiter ||= AlaveteliRateLimiter::IPRateLimiter.new(
+        AlaveteliRateLimiter::Rule.new(
+          :password_change, 3,
+          AlaveteliRateLimiter::Window.new(1, :hour)
+        )
+      )
+    end
+
+  end
+
+  # Rate limit login confirmation email resend
+  Users::SessionsController.class_eval do
+
+    def create_with_rate_limit
+      if @post_redirect.present?
+        @user_signin =
+          User.authenticate_from_form(user_signin_params,
+                                      @post_redirect.reason_params[:user_name])
+      end
+      if @post_redirect.nil? || !@user_signin.errors.empty?
+        clear_session_credentials
+        render template: 'user/sign'
+      elsif @user_signin.email_confirmed
+        if spam_user?(@user_signin)
+          handle_spam_user(@user_signin, 'signin') do
+            render template: 'user/sign'
+          end && return
+        end
+
+        sign_in(@user_signin, remember_me: params[:remember_me].present?)
+
+        if is_modal_dialog
+          render template: 'users/sessions/show'
+        else
+          do_post_redirect @post_redirect, @user_signin
+        end
+      else
+        ip_rate_limiter.record!(user_ip) if user_ip
+        if user_ip && ip_rate_limiter.limit?(user_ip)
+          logger.info "Rate limited login confirmation resend from #{user_ip}"
+          render action: 'confirm'
+          return
+        end
+        send_confirmation_mail @user_signin
+      end
+
+    rescue ActionController::ParameterMissing
+      flash[:error] = _('Invalid form submission')
+      render template: 'user/sign'
+    end
+
+    alias_method :create_without_rate_limit, :create
+    alias_method :create, :create_with_rate_limit
+
+  end
+
+  # Move signup rate limiter to cover already_registered_mail path
+  UserController.class_eval do
+
+    def signup_with_rate_limit
+      @user_signup = User.new(user_params(:user_signup))
+      error = false
+      if @request_from_foreign_country && !verify_recaptcha
+        flash.now[:error] = _('There was an error with the reCAPTCHA. ' \
+                                'Please try again.')
+        error = true
+      end
+      @user_signup.valid?
+      user_alreadyexists = User.find_user_by_email(params[:user_signup][:email])
+      if user_alreadyexists
+        @user_signup.errors.delete(:email, :taken)
+      end
+      if error || !@user_signup.errors.empty?
+        render action: 'sign'
+      else
+        # Rate limit ALL signup attempts (both new and already-registered)
+        ip_rate_limiter.record!(user_ip) if user_ip
+
+        if user_ip && ip_rate_limiter.limit?(user_ip)
+          handle_rate_limited_signup(user_ip, @user_signup.email) && return
+        end
+
+        if user_alreadyexists
+          already_registered_mail user_alreadyexists
+        else
+          if blocked_ip?
+            handle_blocked_ip(@user_signup) && return
+          end
+
+          if spam_user?(@user_signup)
+            handle_spam_user(@user_signup, 'signup') { render action: 'sign' }
+            render action: 'sign' unless performed?
+            return
+          end
+
+          @user_signup.email_confirmed = false
+          @user_signup.save!
+          send_confirmation_mail @user_signup
+        end
+        nil
+      end
+
+    rescue ActionController::ParameterMissing
+      flash[:error] = _('Invalid form submission')
+      render action: :sign
+    end
+
+    alias_method :signup_without_rate_limit, :signup
+    alias_method :signup, :signup_with_rate_limit
+
+  end
+
   # Hong Kong-specific controller helper methods for deadline calculations
   ApplicationController.class_eval do
 

@@ -1,4 +1,7 @@
 # -*- encoding : utf-8 -*-
+require 'net/http'
+require 'json'
+
 # Add a callback - to be executed before each request in development,
 # and at startup in production - to patch existing app classes.
 # Doing so in init/environment.rb wouldn't work in development, since
@@ -8,6 +11,7 @@
 Rails.configuration.to_prepare do
 
   # Fix IP detection: use Cloudflare headers for real client IP
+  # + Cloudflare Turnstile CAPTCHA (replaces Google reCAPTCHA)
   ApplicationController.class_eval do
 
     def user_ip
@@ -21,6 +25,37 @@ Rails.configuration.to_prepare do
       return cf_country if cf_country.present? && cf_country != 'XX'
       return AlaveteliGeoIP.country_code_from_ip(user_ip) if user_ip
       AlaveteliConfiguration.iso_country_code
+    end
+
+    def turnstile_site_key
+      MySociety::Config.get('TURNSTILE_SITE_KEY', '')
+    end
+    helper_method :turnstile_site_key
+
+    def turnstile_tags
+      key = turnstile_site_key
+      %(<div class="cf-turnstile" data-sitekey="#{ERB::Util.html_escape(key)}"></div>).html_safe
+    end
+    helper_method :turnstile_tags
+
+    # Override the recaptcha gem's verify_recaptcha to use Cloudflare Turnstile
+    def verify_recaptcha(options = {})
+      token = params['cf-turnstile-response']
+      return false if token.blank?
+
+      secret = MySociety::Config.get('TURNSTILE_SECRET_KEY', '')
+      uri = URI('https://challenges.cloudflare.com/turnstile/v0/siteverify')
+      response = Net::HTTP.post_form(uri, {
+        secret: secret,
+        response: token,
+        remoteip: user_ip
+      })
+
+      result = JSON.parse(response.body)
+      result['success'] == true
+    rescue StandardError => e
+      Rails.logger.error("Turnstile verification failed: #{e.message}")
+      false
     end
 
   end

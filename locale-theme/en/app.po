@@ -1,7 +1,122 @@
 # Your theme's locale files will override the core locale files.  This
 # is a good place to put both translations specific to your theme, and
-# "translations" of the core English words (e.g. you might want to
-# call FOI "RTI" throughougout, like this:
+# "translations" of the core English words (e.g. for Hong Kong we use
+# "Access to Information" instead of "Freedom of Information", like this:
 #
 # msgid "Make and browse Freedom of Information (FOI) requests"
-# msgstr "Make and browse Right to Know (RTI) requests"
+# msgstr "Make and browse Access to Information (ATI) requests"
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AccessInfoHK Theme\n"
+"Report-Msgid-Bugs-To: \n"
+"Language: en\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# --- Titles, headings, navigation ---
+
+msgid "Make and browse Freedom of Information (FOI) requests"
+msgstr "Make and browse Access to Information (ATI) requests"
+
+msgid " - view and make Freedom of Information requests"
+msgstr " - view and make access to information requests"
+
+msgid "Search Freedom of Information requests, public authorities and users"
+msgstr "Search access to information requests, public authorities and users"
+
+msgid "{{user_name}} - Freedom of Information requests"
+msgstr "{{user_name}} - access to information requests"
+
+msgid "Your Freedom of Information request"
+msgid_plural "Your Freedom of Information requests (approximately {{count}})"
+msgstr[0] "Your access to information request"
+msgstr[1] "Your access to information requests (approximately {{count}})"
+
+msgid "This person's Freedom of Information request"
+msgid_plural "This person's Freedom of Information requests (approximately {{count}})"
+msgstr[0] "This person's access to information request"
+msgstr[1] "This person's access to information requests (approximately {{count}})"
+
+msgid "FOI requests by '{{user_name}}'"
+msgstr "Access to information requests by '{{user_name}}'"
+
+msgid "FOI requests {{start_count}} to {{end_count}} of about {{total_count}}"
+msgstr "Access to information requests {{start_count}} to {{end_count}} of about {{total_count}}"
+
+msgid "One FOI request found"
+msgstr "One access to information request found"
+
+msgid "New Freedom of Information requests"
+msgstr "New access to information requests"
+
+msgid "Successful Freedom of Information requests"
+msgstr "Successful access to information requests"
+
+# --- Actions and labels ---
+
+msgid "Upload FOI response"
+msgstr "Upload response"
+
+msgid "Respond to the FOI request '{{request}}' made by {{user}}"
+msgstr "Respond to the request '{{request}}' made by {{user}}"
+
+msgid "Write your FOI follow up message to {{authority_name}}"
+msgstr "Write your follow-up message to {{authority_name}}"
+
+msgid "Confirm you want to follow all successful FOI requests"
+msgstr "Confirm you want to follow all successful access to information requests"
+
+msgid "Then you will be following all new FOI requests."
+msgstr "Then you will be following all new access to information requests."
+
+msgid "Then you will be notified whenever an FOI request succeeds."
+msgstr "Then you will be notified whenever an access to information request succeeds."
+
+msgid "Then you'll be allowed to send FOI requests."
+msgstr "Then you'll be allowed to send access to information requests."
+
+# --- Email / notification subjects and bodies ---
+
+msgid "New response to your FOI request - {{request_title}}"
+msgstr "New response to your access to information request - {{request_title}}"
+
+msgid "Your response to an FOI request was not delivered"
+msgstr "Your response to an access to information request was not delivered"
+
+msgid "Thank you for responding to this FOI request! "
+msgstr "Thank you for responding to this access to information request! "
+
+msgid "A full history of my FOI request and all "
+msgstr "A full history of my access to information request and all "
+
+# --- Admin / classification ---
+
+msgid "Not an FOI request"
+msgstr "Not an access to information request"
+
+msgid "Considered by administrators as not an FOI request"
+msgstr "Considered by administrators as not an access to information request"
+
+msgid "FOI response requires admin ({{reason}}) - "
+msgstr "Response requires admin ({{reason}}) - "
+
+# --- Authority / email-address handling ---
+
+msgid "Ask us to update FOI email"
+msgstr "Ask us to update request email"
+
+msgid "the main FOI contact at {{public_body}}"
+msgstr "the main access to information contact at {{public_body}}"
+
+msgid "The contact email address for FOI requests to the authority."
+msgstr "The contact email address for access to information requests to the authority."
+
+msgid "{{reason}}. Unfortunately we don't know the FOI email address for that "
+msgstr "{{reason}}. Unfortunately we don't know the request email address for that "
+
+# --- Country/regional banner ---
+
+msgid "Hello! You can make Freedom of Information requests within "
+msgstr "Hello! You can make access to information requests within "

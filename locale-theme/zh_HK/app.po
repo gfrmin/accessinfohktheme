@@ -87,12 +87,6 @@ msgstr "工作日"
 msgid "internal review"
 msgstr "內部覆核"
 
-msgid "Data Guru LLC"
-msgstr "Data Guru LLC"
-
-msgid "Public Data Market"
-msgstr "Public Data Market"
-
 msgid "access to information"
 msgstr "查閱資料"
 

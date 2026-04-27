@@ -34,8 +34,8 @@
                             href="mailto:<%=@contact_email%>"><%=@contact_email%></a>
       </li>
 
-      <li>We are a <strong>charity</strong> and not part of the
-        Government.</li>
+      <li>We are a <strong>community project</strong>, not part of the
+        Hong Kong Government.</li>
     </ul>
   <% end %>
 </div>
@@ -87,7 +87,7 @@
 
   <p class="form_note">
     We can only help you with <strong>technical problems</strong>, or questions
-    about Freedom of Information.
+    about access to information.
   </p>
 
   <% if @recaptcha_required %>
@@ -96,8 +96,8 @@
 
   <div class="form_button">
     <%= hidden_field_tag(:submitted_contact_form, 1) %>
-    <%= submit_tag "Send message to the charity", :data => { :disable_with => "Sending..." } %>
-    &lt;-- we run this site, not the Government!
+    <%= submit_tag "Send message", :data => { :disable_with => "Sending..." } %>
+    &lt;-- we run this site independently, not the Government!
   </div>
 
 <% end %>

@@ -950,3 +950,57 @@ dt {
 .pro-pill {
   background-color: desaturate(darken($color_secondary, 10%), 5%);
 }
+
+/* HK Deadline Info */
+.hk-deadline-info {
+  margin-top: 1em;
+  padding: 1em 1.5em;
+  border-radius: 5px;
+  border-left: 4px solid;
+
+  &.hk-deadline-ok {
+    background-color: desaturate(lighten($color_green, 35%), 10%);
+    border-color: $color_green;
+  }
+
+  &.hk-deadline-approaching {
+    background-color: desaturate(lighten($color_orange, 30%), 10%);
+    border-color: $color_orange;
+  }
+
+  &.hk-deadline-overdue {
+    background-color: desaturate(lighten($color_red, 30%), 10%);
+    border-color: $color_red;
+  }
+
+  &.hk-deadline-significantly-overdue {
+    background-color: desaturate(lighten($color_red, 25%), 10%);
+    border-color: darken($color_red, 10%);
+  }
+}
+
+.hk-deadline-info__summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5em;
+  margin-bottom: 0.5em;
+
+  strong {
+    font-size: 0.9em;
+  }
+}
+
+.hk-deadline-info__status {
+  font-size: 0.85em;
+  color: $color_dark_grey;
+}
+
+.hk-deadline-info__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em 1.5em;
+  font-size: 0.8em;
+  color: $color_dark_grey;
+}

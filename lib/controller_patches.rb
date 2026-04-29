@@ -367,9 +367,8 @@ Rails.configuration.to_prepare do
         end
       end
     end
-    # Note: Uncomment below to activate (requires testing in Alaveteli environment)
-    # alias_method :show_without_hk_deadline_info, :show
-    # alias_method :show, :show_with_hk_deadline_info
+    alias_method :show_without_hk_deadline_info, :show
+    alias_method :show, :show_with_hk_deadline_info
 
   end
 

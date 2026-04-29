@@ -1,0 +1,22 @@
+<% if @hk_deadlines %>
+  <div class="hk-deadline-info <%= hk_deadline_status_class(@info_request.created_at) %>">
+    <div class="hk-deadline-info__summary">
+      <strong><%= _('HK Code on Access to Information Deadlines') %></strong>
+      <span class="hk-deadline-info__status"><%= @hk_deadline_message %></span>
+    </div>
+    <div class="hk-deadline-info__details">
+      <span class="hk-deadline-info__item">
+        <%= _('Interim reply (10 days)') %>: <%= @hk_deadlines[:initial_response].strftime('%e %b %Y') %>
+      </span>
+      <span class="hk-deadline-info__item">
+        <%= _('Target response (21 days)') %>: <%= @hk_deadlines[:target_completion].strftime('%e %b %Y') %>
+      </span>
+      <span class="hk-deadline-info__item">
+        <%= _('Maximum (51 days)') %>: <%= @hk_deadlines[:maximum_time].strftime('%e %b %Y') %>
+      </span>
+      <span class="hk-deadline-info__item">
+        <%= _('Days elapsed') %>: <%= @hk_days_elapsed %>
+      </span>
+    </div>
+  </div>
+<% end %>

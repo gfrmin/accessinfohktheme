@@ -1,10 +1,8 @@
-# Your theme's locale files will override the core locale files.  This
-# is a good place to put both translations specific to your theme, and
-# "translations" of the core English words (e.g. for Hong Kong we use
-# "Access to Information" instead of "Freedom of Information", like this:
+# English locale overrides for AccessInfoHK theme.
+# Replaces "Freedom of Information" / "FOI" with
+# "Access to Information" / "ATI" for Hong Kong's legal terminology.
 #
-# msgid "Make and browse Freedom of Information (FOI) requests"
-# msgstr "Make and browse Access to Information (ATI) requests"
+# Every msgid must be copied character-for-character from locale/app.pot.
 #
 msgid ""
 msgstr ""
@@ -15,7 +13,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-# --- Titles, headings, navigation ---
+# --- Legislation model ---
+
+msgid "FOI"
+msgstr "ATI"
+
+msgid "Freedom of Information"
+msgstr "Access to Information"
+
+msgid "A Freedom of Information request"
+msgstr "An Access to Information request"
+
+msgid "Freedom of Information Act"
+msgstr "Code on Access to Information"
+
+# --- Page titles and navigation ---
 
 msgid "Make and browse Freedom of Information (FOI) requests"
 msgstr "Make and browse Access to Information (ATI) requests"
@@ -29,15 +41,16 @@ msgstr "Search access to information requests, public authorities and users"
 msgid "{{user_name}} - Freedom of Information requests"
 msgstr "{{user_name}} - access to information requests"
 
-msgid "Your Freedom of Information request"
-msgid_plural "Your Freedom of Information requests (approximately {{count}})"
-msgstr[0] "Your access to information request"
-msgstr[1] "Your access to information requests (approximately {{count}})"
+msgid "{{title}} - a Freedom of Information request to {{public_body}}"
+msgstr "{{title}} - an access to information request to {{public_body}}"
 
-msgid "This person's Freedom of Information request"
-msgid_plural "This person's Freedom of Information requests (approximately {{count}})"
-msgstr[0] "This person's access to information request"
-msgstr[1] "This person's access to information requests (approximately {{count}})"
+msgid "FOI in Action"
+msgstr "ATI in Action"
+
+# --- Request listings and pagination ---
+
+msgid "FOI requests"
+msgstr "Access to information requests"
 
 msgid "FOI requests by '{{user_name}}'"
 msgstr "Access to information requests by '{{user_name}}'"
@@ -48,11 +61,61 @@ msgstr "Access to information requests {{start_count}} to {{end_count}} of about
 msgid "One FOI request found"
 msgstr "One access to information request found"
 
+msgid "About {{count}} FOI requests found"
+msgstr "About {{count}} access to information requests found"
+
 msgid "New Freedom of Information requests"
 msgstr "New access to information requests"
 
 msgid "Successful Freedom of Information requests"
 msgstr "Successful access to information requests"
+
+msgid "Batch FOI requests"
+msgstr "Batch access to information requests"
+
+# --- User profile and request counts ---
+
+msgid "Your Freedom of Information request"
+msgid_plural "Your Freedom of Information requests (approximately {{count}})"
+msgstr[0] "Your access to information request"
+msgstr[1] "Your access to information requests (approximately {{count}})"
+
+msgid "Your {{count}} private Freedom of Information request"
+msgid_plural "Your {{count}} private Freedom of Information requests"
+msgstr[0] "Your {{count}} private access to information request"
+msgstr[1] "Your {{count}} private access to information requests"
+
+msgid "This person's Freedom of Information request"
+msgid_plural "This person's Freedom of Information requests (approximately {{count}})"
+msgstr[0] "This person's access to information request"
+msgstr[1] "This person's access to information requests (approximately {{count}})"
+
+msgid "Freedom of Information requests made"
+msgstr "Access to information requests made"
+
+msgid "Freedom of Information requests made by this person"
+msgstr "Access to information requests made by this person"
+
+msgid "Freedom of Information requests made by you"
+msgstr "Access to information requests made by you"
+
+msgid "Freedom of Information requests made using this site"
+msgstr "Access to information requests made using this site"
+
+msgid "This person has made no Freedom of Information requests using this site."
+msgstr "This person has made no access to information requests using this site."
+
+msgid "You have made no Freedom of Information requests using this site."
+msgstr "You have made no access to information requests using this site."
+
+msgid "Nobody has made any Freedom of Information requests to {{public_body_name}} using this site yet."
+msgstr "Nobody has made any access to information requests to {{public_body_name}} using this site yet."
+
+msgid "View Freedom of Information requests made by {{user_name}}:"
+msgstr "View access to information requests made by {{user_name}}:"
+
+msgid "What are you investigating using Freedom of Information?"
+msgstr "What are you investigating using access to information?"
 
 # --- Actions and labels ---
 
@@ -65,8 +128,13 @@ msgstr "Respond to the request '{{request}}' made by {{user}}"
 msgid "Write your FOI follow up message to {{authority_name}}"
 msgstr "Write your follow-up message to {{authority_name}}"
 
+# --- Confirmation and follow flow ---
+
 msgid "Confirm you want to follow all successful FOI requests"
 msgstr "Confirm you want to follow all successful access to information requests"
+
+msgid "Confirm your FOI request to {{public_body_name}}"
+msgstr "Confirm your access to information request to {{public_body_name}}"
 
 msgid "Then you will be following all new FOI requests."
 msgstr "Then you will be following all new access to information requests."
@@ -77,19 +145,99 @@ msgstr "Then you will be notified whenever an access to information request succ
 msgid "Then you'll be allowed to send FOI requests."
 msgstr "Then you'll be allowed to send access to information requests."
 
-# --- Email / notification subjects and bodies ---
+msgid "Then your FOI request to {{public_body_name}} will be sent and published."
+msgstr "Then your access to information request to {{public_body_name}} will be sent and published."
+
+msgid "Then you can classify the FOI response you have got from {{authority_name}}."
+msgstr "Then you can classify the response you have got from {{authority_name}}."
+
+msgid "Then you can upload an FOI response."
+msgstr "Then you can upload a response."
+
+msgid "To classify the response to this FOI request"
+msgstr "To classify the response to this access to information request"
+
+msgid "To send and publish your FOI request"
+msgstr "To send and publish your access to information request"
+
+msgid "To update the status of this FOI request"
+msgstr "To update the status of this access to information request"
+
+# --- Email subjects ---
 
 msgid "New response to your FOI request - {{request_title}}"
 msgstr "New response to your access to information request - {{request_title}}"
 
+msgid "Clarify your FOI request - {{request_title}}"
+msgstr "Clarify your access to information request - {{request_title}}"
+
+msgid "Classify an FOI response from {{authority_name}}"
+msgstr "Classify a response from {{authority_name}}"
+
+msgid "Delayed response to your FOI request - {{request_title}}"
+msgstr "Delayed response to your access to information request - {{request_title}}"
+
+msgid "Some notes have been added to your FOI request - {{request_title}}"
+msgstr "Some notes have been added to your access to information request - {{request_title}}"
+
+msgid "Somebody added a note to your FOI request - {{request_title}}"
+msgstr "Somebody added a note to your access to information request - {{request_title}}"
+
+msgid "You're long overdue a response to your FOI request - {{request_title}}"
+msgstr "You're long overdue a response to your access to information request - {{request_title}}"
+
+msgid "Your FOI request - {{request_title}} has been made public on {{site_name}}"
+msgstr "Your access to information request - {{request_title}} has been made public on {{site_name}}"
+
+msgid "Your FOI request - {{request_title}} will be made public on {{site_name}} this week"
+msgstr "Your access to information request - {{request_title}} will be made public on {{site_name}} this week"
+
 msgid "Your response to an FOI request was not delivered"
 msgstr "Your response to an access to information request was not delivered"
 
-msgid "Thank you for responding to this FOI request! "
-msgstr "Thank you for responding to this access to information request! "
+msgid "A survey about your recent Freedom of Information request"
+msgstr "A survey about your recent access to information request"
 
-msgid "A full history of my FOI request and all "
-msgstr "A full history of my access to information request and all "
+# --- Email / notification bodies ---
+
+msgid "Thank you for responding to this FOI request! Your response has been published below, and a link to your response has been emailed to {{user_name}}."
+msgstr "Thank you for responding to this access to information request! Your response has been published below, and a link to your response has been emailed to {{user_name}}."
+
+msgid "A full history of my FOI request and all correspondence is available on the Internet at this address: {{url}}"
+msgstr "A full history of my access to information request and all correspondence is available on the Internet at this address: {{url}}"
+
+msgid "Four weeks ago you made a Freedom of Information request to {{public_body_name}} using {{site_name}}."
+msgstr "Four weeks ago you made an access to information request to {{public_body_name}} using {{site_name}}."
+
+msgid "We would like to know more about you, and your experience making a Freedom of Information request through the site."
+msgstr "We would like to know more about you, and your experience making an access to information request through the site."
+
+msgid "I am writing to request an internal review of {{public_body_name}}'s handling of my FOI request '{{info_request_title}}'."
+msgstr "I am writing to request an internal review of {{public_body_name}}'s handling of my access to information request '{{info_request_title}}'."
+
+msgid "Please pass this on to the person who conducts Freedom of Information reviews."
+msgstr "Please pass this on to the person who conducts access to information reviews."
+
+msgid "You have the <strong>right</strong> to request information from any publicly-funded body, and get answers. {{site_name}} helps you make a Freedom of Information request. It also publishes all requests online."
+msgstr "You have the <strong>right</strong> to request information from any publicly-funded body, and get answers. {{site_name}} helps you make an access to information request. It also publishes all requests online."
+
+msgid "Please describe more what the request is about in the subject. There is no need to say it is an FOI request, we add that on anyway."
+msgstr "Please describe more what the request is about in the subject. There is no need to say it is an access to information request, we add that on anyway."
+
+msgid "If the error was a delivery failure, and you can find an up to date FOI email address for the authority, please tell us using the form below."
+msgstr "If the error was a delivery failure, and you can find an up to date request email address for the authority, please tell us using the form below."
+
+msgid "If you find this service useful as an FOI officer, please ask your web manager to link to us from your organisation's FOI page."
+msgstr "If you find this service useful as an ATI officer, please ask your web manager to link to us from your organisation's ATI page."
+
+msgid "Requests for personal information and vexatious requests are not considered valid for FOI purposes (<a href=\"/help/about\">read more</a>)."
+msgstr "Requests for personal information and vexatious requests are not considered valid for ATI purposes (<a href=\"/help/about\">read more</a>)."
+
+msgid "The authority say that they <strong>need a postal address</strong>, not just an email, for it to be a valid FOI request"
+msgstr "The authority say that they <strong>need a postal address</strong>, not just an email, for it to be a valid access to information request"
+
+msgid "We consider it is not a valid FOI request, and have therefore hidden it from other users."
+msgstr "We consider it is not a valid access to information request, and have therefore hidden it from other users."
 
 # --- Admin / classification ---
 
@@ -99,8 +247,28 @@ msgstr "Not an access to information request"
 msgid "Considered by administrators as not an FOI request"
 msgstr "Considered by administrators as not an access to information request"
 
-msgid "FOI response requires admin ({{reason}}) - "
-msgstr "Response requires admin ({{reason}}) - "
+msgid "FOI response requires admin ({{reason}}) - {{request_title}}"
+msgstr "Response requires admin ({{reason}}) - {{request_title}}"
+
+msgid "This request has been reviewed by an administrator and is considered not to be an FOI request"
+msgstr "This request has been reviewed by an administrator and is considered not to be an access to information request"
+
+# --- Law applicability ---
+
+msgid "FOI law does not apply to this authority."
+msgstr "ATI law does not apply to this authority."
+
+msgid "Freedom of Information law does not apply to this authority, so you cannot make a request to it."
+msgstr "Access to information law does not apply to this authority, so you cannot make a request to it."
+
+msgid "Freedom of Information law no longer applies to {{public_body_name}}."
+msgstr "Access to information law no longer applies to {{public_body_name}}."
+
+msgid "The Freedom of Information Act <strong>does not apply</strong> to"
+msgstr "The Code on Access to Information <strong>does not apply</strong> to"
+
+msgid "This authority is not subject to FOI law, so is not legally obliged to respond"
+msgstr "This authority is not subject to ATI law, so is not legally obliged to respond"
 
 # --- Authority / email-address handling ---
 
@@ -110,13 +278,71 @@ msgstr "Ask us to update request email"
 msgid "the main FOI contact at {{public_body}}"
 msgstr "the main access to information contact at {{public_body}}"
 
+msgid "the main FOI contact address for {{public_body}}"
+msgstr "the main access to information contact address for {{public_body}}"
+
 msgid "The contact email address for FOI requests to the authority."
 msgstr "The contact email address for access to information requests to the authority."
 
-msgid "{{reason}}. Unfortunately we don't know the FOI email address for that "
-msgstr "{{reason}}. Unfortunately we don't know the request email address for that "
+msgid "{{reason}}. Unfortunately we don't know the FOI email address for that authority, so we can't validate this. Please <a href=\"{{url}}\">contact us</a> to sort it out."
+msgstr "{{reason}}. Unfortunately we don't know the request email address for that authority, so we can't validate this. Please <a href=\"{{url}}\">contact us</a> to sort it out."
 
-# --- Country/regional banner ---
+# --- Attachment and plain-text views ---
 
-msgid "Hello! You can make Freedom of Information requests within "
-msgstr "Hello! You can make access to information requests within "
+msgid "This is a plain-text version of the Freedom of Information request \"{{request_title}}\".  The latest, full version is available online at {{full_url}}"
+msgstr "This is a plain-text version of the access to information request \"{{request_title}}\".  The latest, full version is available online at {{full_url}}"
+
+msgid "This is an HTML version of an attachment to the Freedom of Information request"
+msgstr "This is an HTML version of an attachment to the access to information request"
+
+# --- Search offline ---
+
+msgid "The search index is currently offline, so we can't show the Freedom of Information requests that have been made to this authority."
+msgstr "The search index is currently offline, so we can't show the access to information requests that have been made to this authority."
+
+msgid "The search index is currently offline, so we can't show the Freedom of Information requests this person has made."
+msgstr "The search index is currently offline, so we can't show the access to information requests this person has made."
+
+# --- Citations ---
+
+msgid "Let us know about great examples of <a href=\"{{citations_path}}\">FOI in Action</a>."
+msgstr "Let us know about great examples of <a href=\"{{citations_path}}\">ATI in Action</a>."
+
+msgid "See more examples of <a href=\"{{citations_path}}\">FOI in Action</a>."
+msgstr "See more examples of <a href=\"{{citations_path}}\">ATI in Action</a>."
+
+# --- Statistics ---
+
+msgid "<strong>Be careful!</strong> To use this data in an honourable way, you will need a good internal knowledge of user behaviour on {{site_name}}. How, why and by whom requests are categorised is not straightforward, and there will be user error and ambiguity. You will also need to understand FOI law, and the way authorities use it. Plus you'll need to be an elite statistician.  Please <a href=\"{{contact_path}}\">contact us</a> with questions."
+msgstr "<strong>Be careful!</strong> To use this data in an honourable way, you will need a good internal knowledge of user behaviour on {{site_name}}. How, why and by whom requests are categorised is not straightforward, and there will be user error and ambiguity. You will also need to understand ATI law, and the way authorities use it. Plus you'll need to be an elite statistician.  Please <a href=\"{{contact_path}}\">contact us</a> with questions."
+
+# --- Country/regional banners ---
+
+msgid "Hello! You can make Freedom of Information requests within {{country_name}} at {{link_to_website}}"
+msgstr "Hello! You can make access to information requests within {{country_name}} at {{link_to_website}}"
+
+msgid "Hello! You can make Freedom of Information requests within {{country_name}} at {{link_to_website}} and to EU institutions at {{link_to_asktheeu}}"
+msgstr "Hello! You can make access to information requests within {{country_name}} at {{link_to_website}} and to EU institutions at {{link_to_asktheeu}}"
+
+msgid "Hello! We have an <a href=\"{{url}}\">important message</a> for visitors in other countries. You can also make Freedom of Information requests to EU institutions at {{link_to_asktheeu}}"
+msgstr "Hello! We have an <a href=\"{{url}}\">important message</a> for visitors in other countries. You can also make access to information requests to EU institutions at {{link_to_asktheeu}}"
+
+msgid "Hello! We have an <a href=\"{{url}}\">important message</a> for visitors outside {{country_name}}. You can also make Freedom of Information requests to EU institutions at {{link_to_asktheeu}}"
+msgstr "Hello! We have an <a href=\"{{url}}\">important message</a> for visitors outside {{country_name}}. You can also make access to information requests to EU institutions at {{link_to_asktheeu}}"
+
+# --- Pro toolkit ---
+
+msgid "A powerful, fully-featured FOI toolkit for journalists"
+msgstr "A powerful, fully-featured ATI toolkit for journalists"
+
+msgid "{{pro_site_link}} is an all-in-one FOI toolkit including everything you need to keep on top of complex FOI-driven investigations."
+msgstr "{{pro_site_link}} is an all-in-one ATI toolkit including everything you need to keep on top of complex ATI-driven investigations."
+
+msgid "{{pro_site_name}} is a powerful, fully-featured FOI toolkit for journalists."
+msgstr "{{pro_site_name}} is a powerful, fully-featured ATI toolkit for journalists."
+
+# --- Reference tags ---
+
+msgid "[FOI #{{request}} email]"
+msgstr "[ATI #{{request}} email]"
+

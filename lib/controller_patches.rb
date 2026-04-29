@@ -352,7 +352,7 @@ Rails.configuration.to_prepare do
     def show_with_hk_deadline_info
       show_without_hk_deadline_info
 
-      if @info_request && @info_request.awaiting_response
+      if @info_request && @info_request.described_state == 'waiting_response'
         @hk_deadlines = hk_calculate_deadlines(@info_request.created_at)
         @hk_days_elapsed = hk_days_elapsed(@info_request.created_at)
         @hk_deadline_message = hk_deadline_status_message(@info_request.created_at)

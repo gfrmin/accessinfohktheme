@@ -10,8 +10,16 @@
       posthog.init('<%= AlaveteliConfiguration.posthog_key %>', {
         api_host: 'https://us.i.posthog.com',
         person_profiles: 'identified_only',
-        autocapture: true
+        autocapture: true,
+        bootstrap: { distinctID: <%= analytics_distinct_id.to_json.html_safe %> }
       });
+      <% if current_user %>
+        posthog.identify(<%= "user_#{current_user.id}".to_json.html_safe %>, {
+          email: <%= current_user.email.to_json.html_safe %>,
+          name: <%= current_user.name.to_json.html_safe %>,
+          locale: <%= AlaveteliLocalization.locale.to_json.html_safe %>
+        });
+      <% end %>
     </script>
   <% end %>
 <% end %>

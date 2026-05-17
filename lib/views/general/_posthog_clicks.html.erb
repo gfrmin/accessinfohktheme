@@ -1,0 +1,79 @@
+<% if analytics_eligible? && AlaveteliConfiguration.posthog_key.present? %>
+<script>
+  (function () {
+    if (!window.posthog) return;
+    var cap = function (name, props) {
+      try { posthog.capture(name, props || {}); } catch (e) {}
+    };
+
+    document.addEventListener('click', function (e) {
+      var el = e.target.closest && e.target.closest(
+        'a, button, [data-ph-event]'
+      );
+      if (!el) return;
+
+      var phEvent = el.getAttribute('data-ph-event');
+      if (phEvent) {
+        var props = {};
+        for (var i = 0; i < el.attributes.length; i++) {
+          var a = el.attributes[i];
+          if (a.name.indexOf('data-ph-prop-') === 0) {
+            props[a.name.slice('data-ph-prop-'.length)] = a.value;
+          }
+        }
+        cap(phEvent, props);
+        return;
+      }
+
+      var href = el.getAttribute && el.getAttribute('href');
+      if (!href) return;
+
+      if (href.indexOf('mailto:') === 0) {
+        cap('email_authority_clicked', {
+          to: href.slice(7).split('?')[0],
+          path: location.pathname
+        });
+        return;
+      }
+
+      var type = el.getAttribute('type') || '';
+      if (
+        type === 'application/rss+xml' ||
+        type === 'application/atom+xml' ||
+        /\.(rss|atom)(\?|$)/i.test(href) ||
+        /\/feed(\/|$|\?)/i.test(href)
+      ) {
+        cap('feed_subscribed', { feed_url: href, path: location.pathname });
+        return;
+      }
+
+      if (/\/track\//.test(href) && /feed=(json|atom)/.test(href)) {
+        cap('feed_subscribed', {
+          feed_url: href,
+          feed_type: /feed=json/.test(href) ? 'json' : 'atom',
+          path: location.pathname
+        });
+      }
+    }, true);
+
+    var localeSwitcher = document.getElementById('user_locale_switcher');
+    if (localeSwitcher) {
+      localeSwitcher.addEventListener('click', function (e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        var to = (link.textContent || '').trim() ||
+          link.getAttribute('hreflang') || link.getAttribute('href');
+        cap('locale_switched', {
+          from: document.documentElement.getAttribute('lang') || '',
+          to: to,
+          path: location.pathname
+        });
+      });
+    }
+
+    window.addEventListener('beforeprint', function () {
+      cap('print_clicked', { path: location.pathname });
+    });
+  })();
+</script>
+<% end %>

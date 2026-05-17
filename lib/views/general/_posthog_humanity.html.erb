@@ -1,0 +1,38 @@
+<% if analytics_eligible? && AlaveteliConfiguration.posthog_key.present? %>
+<script>
+  (function () {
+    if (!window.posthog) return;
+    var fired = false;
+    var cleanup;
+    var fire = function (reason) {
+      if (fired) return;
+      fired = true;
+      try { posthog.capture('humanity_check', { trigger: reason }); } catch (e) {}
+      cleanup();
+    };
+    var onScroll = function () { if (window.scrollY > 100) fire('scroll'); };
+    var startX = null, startY = null;
+    var onMove = function (e) {
+      if (startX === null) { startX = e.clientX; startY = e.clientY; return; }
+      var dx = e.clientX - startX, dy = e.clientY - startY;
+      if (dx * dx + dy * dy > 2500) fire('pointer');
+    };
+    var onKey = function () { fire('keydown'); };
+    var onTouch = function () { fire('touch'); };
+    var dwellTimer = setTimeout(function () {
+      if (document.visibilityState === 'visible') fire('dwell');
+    }, 8000);
+    cleanup = function () {
+      clearTimeout(dwellTimer);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('touchstart', onTouch);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('keydown', onKey);
+    window.addEventListener('touchstart', onTouch, { passive: true });
+  })();
+</script>
+<% end %>

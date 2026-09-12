@@ -1,9 +1,18 @@
 # -*- encoding : utf-8 -*-
 # If defined, ALAVETELI_TEST_THEME will be loaded in config/initializers/theme_loader
-ALAVETELI_TEST_THEME = 'alavetelitheme'
+ALAVETELI_TEST_THEME = 'accessinfohktheme' unless defined?(ALAVETELI_TEST_THEME)
 require File.expand_path(File.join(File.dirname(__FILE__),'..','..','..','..','spec','spec_helper'))
 
 describe 'AccessInfoHK Theme' do
+
+  # Saving the request reloads its incoming_messages association, which throws
+  # away stubs set on a detached message object. Stub the instances the
+  # association actually yields, and do it after the last save.
+  def stub_incoming_bodies(info_request, body)
+    info_request.incoming_messages.reload.each do |message|
+      allow(message).to receive(:get_main_body_text_unfolded).and_return(body)
+    end
+  end
 
   describe 'Custom Request States' do
 
@@ -89,29 +98,26 @@ describe 'AccessInfoHK Theme' do
 
     describe 'interim reply detection' do
       let(:info_request) { FactoryBot.create(:info_request) }
-      let(:incoming_message) { FactoryBot.create(:incoming_message, info_request: info_request) }
+      let!(:incoming_message) { FactoryBot.create(:incoming_message, info_request: info_request) }
 
       context 'with English interim reply keywords' do
         it 'detects "interim reply" in message' do
-          allow(incoming_message).to receive(:get_main_body_text_unfolded).and_return("This is an interim reply. We need more time.")
-          info_request.incoming_messages << incoming_message
           info_request.update_attribute(:created_at, 15.days.ago)
+          stub_incoming_bodies(info_request, "This is an interim reply. We need more time.")
 
           expect(info_request.has_interim_reply_without_final?).to be true
         end
 
         it 'detects "more time" in message' do
-          allow(incoming_message).to receive(:get_main_body_text_unfolded).and_return("We need more time to process your request.")
-          info_request.incoming_messages << incoming_message
           info_request.update_attribute(:created_at, 15.days.ago)
+          stub_incoming_bodies(info_request, "We need more time to process your request.")
 
           expect(info_request.has_interim_reply_without_final?).to be true
         end
 
         it 'detects "extending" in message' do
-          allow(incoming_message).to receive(:get_main_body_text_unfolded).and_return("We are extending the deadline for your request.")
-          info_request.incoming_messages << incoming_message
           info_request.update_attribute(:created_at, 15.days.ago)
+          stub_incoming_bodies(info_request, "We are extending the deadline for your request.")
 
           expect(info_request.has_interim_reply_without_final?).to be true
         end
@@ -119,25 +125,22 @@ describe 'AccessInfoHK Theme' do
 
       context 'with Chinese interim reply keywords' do
         it 'detects "中期回覆" in message' do
-          allow(incoming_message).to receive(:get_main_body_text_unfolded).and_return("這是中期回覆。我們需要更多時間。")
-          info_request.incoming_messages << incoming_message
           info_request.update_attribute(:created_at, 15.days.ago)
+          stub_incoming_bodies(info_request, "這是中期回覆。我們需要更多時間。")
 
           expect(info_request.has_interim_reply_without_final?).to be true
         end
 
         it 'detects "需要更多時間" in message' do
-          allow(incoming_message).to receive(:get_main_body_text_unfolded).and_return("我們需要更多時間處理你的要求。")
-          info_request.incoming_messages << incoming_message
           info_request.update_attribute(:created_at, 15.days.ago)
+          stub_incoming_bodies(info_request, "我們需要更多時間處理你的要求。")
 
           expect(info_request.has_interim_reply_without_final?).to be true
         end
 
         it 'detects "延長" in message' do
-          allow(incoming_message).to receive(:get_main_body_text_unfolded).and_return("我們正在延長你的要求的截止日期。")
-          info_request.incoming_messages << incoming_message
           info_request.update_attribute(:created_at, 15.days.ago)
+          stub_incoming_bodies(info_request, "我們正在延長你的要求的截止日期。")
 
           expect(info_request.has_interim_reply_without_final?).to be true
         end
@@ -145,9 +148,8 @@ describe 'AccessInfoHK Theme' do
 
       context 'without interim reply keywords' do
         it 'does not detect interim reply in regular message' do
-          allow(incoming_message).to receive(:get_main_body_text_unfolded).and_return("Here is the information you requested.")
-          info_request.incoming_messages << incoming_message
           info_request.update_attribute(:created_at, 15.days.ago)
+          stub_incoming_bodies(info_request, "Here is the information you requested.")
 
           expect(info_request.has_interim_reply_without_final?).to be false
         end
@@ -155,9 +157,8 @@ describe 'AccessInfoHK Theme' do
 
       context 'within first 10 days' do
         it 'does not flag as interim reply if within 10 days' do
-          allow(incoming_message).to receive(:get_main_body_text_unfolded).and_return("This is an interim reply.")
-          info_request.incoming_messages << incoming_message
           info_request.update_attribute(:created_at, 5.days.ago)
+          stub_incoming_bodies(info_request, "This is an interim reply.")
 
           expect(info_request.has_interim_reply_without_final?).to be false
         end
@@ -187,44 +188,36 @@ describe 'AccessInfoHK Theme' do
       end
 
       context 'request over 21 days with English explanation' do
-        let(:incoming_message) { FactoryBot.create(:incoming_message, info_request: info_request) }
+        let!(:incoming_message) { FactoryBot.create(:incoming_message, info_request: info_request) }
 
         it 'does not flag if extension explained' do
-          allow(incoming_message).to receive(:get_main_body_text_unfolded).and_return("We need to request an extension due to exceptional circumstances.")
-          info_request.incoming_messages << incoming_message
           info_request.update_attribute(:created_at, 25.days.ago)
-          allow(info_request).to receive(:awaiting_response).and_return(true)
+          stub_incoming_bodies(info_request, "We need to request an extension due to exceptional circumstances.")
 
           expect(info_request.exceeds_target_time_without_explanation?).to be false
         end
 
         it 'does not flag if more time mentioned' do
-          allow(incoming_message).to receive(:get_main_body_text_unfolded).and_return("We need more time to complete your request.")
-          info_request.incoming_messages << incoming_message
           info_request.update_attribute(:created_at, 25.days.ago)
-          allow(info_request).to receive(:awaiting_response).and_return(true)
+          stub_incoming_bodies(info_request, "We need more time to complete your request.")
 
           expect(info_request.exceeds_target_time_without_explanation?).to be false
         end
       end
 
       context 'request over 21 days with Chinese explanation' do
-        let(:incoming_message) { FactoryBot.create(:incoming_message, info_request: info_request) }
+        let!(:incoming_message) { FactoryBot.create(:incoming_message, info_request: info_request) }
 
         it 'does not flag if 延長 mentioned' do
-          allow(incoming_message).to receive(:get_main_body_text_unfolded).and_return("由於特殊情況，我們需要延長處理時間。")
-          info_request.incoming_messages << incoming_message
           info_request.update_attribute(:created_at, 25.days.ago)
-          allow(info_request).to receive(:awaiting_response).and_return(true)
+          stub_incoming_bodies(info_request, "由於特殊情況，我們需要延長處理時間。")
 
           expect(info_request.exceeds_target_time_without_explanation?).to be false
         end
 
         it 'does not flag if 需要更多時間 mentioned' do
-          allow(incoming_message).to receive(:get_main_body_text_unfolded).and_return("我們需要更多時間完成你的要求。")
-          info_request.incoming_messages << incoming_message
           info_request.update_attribute(:created_at, 25.days.ago)
-          allow(info_request).to receive(:awaiting_response).and_return(true)
+          stub_incoming_bodies(info_request, "我們需要更多時間完成你的要求。")
 
           expect(info_request.exceeds_target_time_without_explanation?).to be false
         end
@@ -233,7 +226,7 @@ describe 'AccessInfoHK Theme' do
       context 'request not awaiting response' do
         it 'does not flag if not awaiting response' do
           info_request.update_attribute(:created_at, 25.days.ago)
-          allow(info_request).to receive(:awaiting_response).and_return(false)
+          info_request.update_attribute(:described_state, 'successful')
 
           expect(info_request.exceeds_target_time_without_explanation?).to be false
         end
@@ -269,7 +262,7 @@ describe 'AccessInfoHK Theme' do
 
   describe 'Theme Configuration' do
     it 'theme name is set correctly' do
-      expect(THEME_NAME).to be_defined
+      expect(defined?(THEME_NAME)).to eq('constant')
       expect(THEME_NAME).to be_a(String)
     end
 
@@ -281,51 +274,51 @@ describe 'AccessInfoHK Theme' do
   describe 'View Customizations' do
     describe 'Help pages' do
       it 'has customized unhappy page' do
-        expect(File.exist?(Rails.root.join('lib/themes/alavetelitheme/lib/views/help/unhappy.html.erb'))).to be true
+        expect(File.exist?(Rails.root.join('lib/themes/accessinfohktheme/lib/views/help/unhappy.html.erb'))).to be true
       end
 
       it 'has customized requesting page' do
-        expect(File.exist?(Rails.root.join('lib/themes/alavetelitheme/lib/views/help/requesting.html.erb'))).to be true
+        expect(File.exist?(Rails.root.join('lib/themes/accessinfohktheme/lib/views/help/requesting.html.erb'))).to be true
       end
 
       it 'has customized about page' do
-        expect(File.exist?(Rails.root.join('lib/themes/alavetelitheme/lib/views/help/about.html.erb'))).to be true
+        expect(File.exist?(Rails.root.join('lib/themes/accessinfohktheme/lib/views/help/about.html.erb'))).to be true
       end
 
       it 'has new exemptions page' do
-        expect(File.exist?(Rails.root.join('lib/themes/alavetelitheme/lib/views/help/exemptions.html.erb'))).to be true
+        expect(File.exist?(Rails.root.join('lib/themes/accessinfohktheme/lib/views/help/exemptions.html.erb'))).to be true
       end
 
       it 'has new timelines page' do
-        expect(File.exist?(Rails.root.join('lib/themes/alavetelitheme/lib/views/help/timelines.html.erb'))).to be true
+        expect(File.exist?(Rails.root.join('lib/themes/accessinfohktheme/lib/views/help/timelines.html.erb'))).to be true
       end
 
       it 'has new payments page' do
-        expect(File.exist?(Rails.root.join('lib/themes/alavetelitheme/lib/views/help/payments.html.erb'))).to be true
+        expect(File.exist?(Rails.root.join('lib/themes/accessinfohktheme/lib/views/help/payments.html.erb'))).to be true
       end
 
       it 'has customized sidebar' do
-        expect(File.exist?(Rails.root.join('lib/themes/alavetelitheme/lib/views/help/_sidebar.html.erb'))).to be true
+        expect(File.exist?(Rails.root.join('lib/themes/accessinfohktheme/lib/views/help/_sidebar.html.erb'))).to be true
       end
     end
   end
 
   describe 'Localization' do
     it 'has Traditional Chinese (Hong Kong) locale directory' do
-      expect(Dir.exist?(Rails.root.join('lib/themes/alavetelitheme/locale-theme/zh_HK'))).to be true
+      expect(Dir.exist?(Rails.root.join('lib/themes/accessinfohktheme/locale-theme/zh_HK'))).to be true
     end
 
     it 'has Traditional Chinese translations file' do
-      expect(File.exist?(Rails.root.join('lib/themes/alavetelitheme/locale-theme/zh_HK/app.po'))).to be true
+      expect(File.exist?(Rails.root.join('lib/themes/accessinfohktheme/locale-theme/zh_HK/app.po'))).to be true
     end
 
     it 'Traditional Chinese translations file is not empty' do
-      content = File.read(Rails.root.join('lib/themes/alavetelitheme/locale-theme/zh_HK/app.po'))
+      content = File.read(Rails.root.join('lib/themes/accessinfohktheme/locale-theme/zh_HK/app.po'))
       expect(content.length).to be > 1000  # Should have substantial content
     end
 
     it 'includes translations for custom statuses' do
-      content = File.read(Rails.root.join('lib/themes/alavetelitheme/locale-theme/zh_HK/app.po'))
+      content = File.read(Rails.root.join('lib/themes/accessinfohktheme/locale-theme/zh_HK/app.po'))
       expect(content).to include('內部覆核待處理')  # Internal review pending
       expect(content).to include('申訴專員')  # The Ombudsman
       expect(content).to include('公開資料守則')  # Code on Access to Information

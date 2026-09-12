@@ -1,8 +1,14 @@
+# If defined, ALAVETELI_TEST_THEME is loaded by
+# config/initializers/theme_loader.rb. Without it the theme is not loaded in
+# the test environment and every example below runs against an unthemed app.
+ALAVETELI_TEST_THEME = 'accessinfohktheme' unless defined?(ALAVETELI_TEST_THEME)
+
 require File.expand_path(
   File.join(File.dirname(__FILE__), '..', '..', '..', '..', 'spec', 'spec_helper')
 )
 
-RSpec.describe RequestController, "show action with HK deadline patches" do
+RSpec.describe RequestController, "show action with HK deadline patches",
+                type: :controller do
   render_views
 
   before do
@@ -82,7 +88,8 @@ RSpec.describe RequestController, "show action with HK deadline patches" do
   end
 end
 
-RSpec.describe ApplicationController, "HK deadline helper methods" do
+RSpec.describe ApplicationController, "HK deadline helper methods",
+                type: :controller do
   controller do
     def index
       render plain: 'ok'

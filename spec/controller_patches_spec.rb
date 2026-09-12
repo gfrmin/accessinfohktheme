@@ -51,6 +51,35 @@ RSpec.describe RequestController, "show action with HK deadline patches" do
       expect(flash[:notice]).to include('21 calendar day target')
     end
   end
+
+  context "when the carried over flash is not a string" do
+    # Controllers such as TrackController set the flash to a Hash describing
+    # a partial to render, then redirect back to the request page. Appending
+    # to that used to raise NoMethodError (and, because it happened after the
+    # template had been rendered, an AbstractController::DoubleRenderError
+    # from the exception handler on top).
+    it "leaves the existing flash alone instead of raising" do
+      info_request = FactoryBot.create(:info_request,
+                                       created_at: 55.days.ago)
+      existing = { inline: 'You are now following this request' }
+
+      get :show,
+          params: { url_title: info_request.url_title },
+          flash: { warning: existing }
+
+      expect(response).to be_successful
+      expect(flash[:warning]).to eq(existing)
+    end
+  end
+
+  context "when the HK deadline banner is rendered" do
+    it "assigns the deadline variables before the template is rendered" do
+      info_request = FactoryBot.create(:info_request,
+                                       created_at: 25.days.ago)
+      get :show, params: { url_title: info_request.url_title }
+      expect(response.body).to include('hk-deadline-info')
+    end
+  end
 end
 
 RSpec.describe ApplicationController, "HK deadline helper methods" do

@@ -348,27 +348,57 @@ Rails.configuration.to_prepare do
   # Add HK-specific display helpers to RequestController
   RequestController.class_eval do
 
-    # Display HK deadline information on request page
+    # Display HK deadline information on request page.
+    #
+    # The work has to happen *before* the original action runs: `show`
+    # renders `request/show` itself, so anything assigned afterwards is
+    # never seen by the template, and a `flash.now` set afterwards is never
+    # displayed.
     def show_with_hk_deadline_info
+      hk_assign_deadline_info
       show_without_hk_deadline_info
-
-      if @info_request && @info_request.described_state == 'waiting_response'
-        @hk_deadlines = hk_calculate_deadlines(@info_request.created_at)
-        @hk_days_elapsed = hk_days_elapsed(@info_request.created_at)
-        @hk_deadline_message = hk_deadline_status_message(@info_request.created_at)
-
-        # Add flash warning if significantly overdue
-        if hk_exceeded_maximum_deadline?(@info_request.created_at)
-          flash.now[:warning] ||= ""
-          flash.now[:warning] += " " + _("This request has exceeded the 51 calendar day maximum under the Code on Access to Information.")
-        elsif hk_exceeded_target_deadline?(@info_request.created_at)
-          flash.now[:notice] ||= ""
-          flash.now[:notice] += " " + _("This request has exceeded the 21 calendar day target response time.")
-        end
-      end
     end
     alias_method :show_without_hk_deadline_info, :show
     alias_method :show, :show_with_hk_deadline_info
+
+    private
+
+    def hk_assign_deadline_info
+      return unless @info_request&.described_state == 'waiting_response'
+
+      created_at = @info_request.created_at
+      @hk_deadlines = hk_calculate_deadlines(created_at)
+      @hk_days_elapsed = hk_days_elapsed(created_at)
+      @hk_deadline_message = hk_deadline_status_message(created_at)
+
+      # Add flash warning if significantly overdue
+      if hk_exceeded_maximum_deadline?(created_at)
+        hk_append_flash(
+          :warning,
+          _("This request has exceeded the 51 calendar day maximum under " \
+            "the Code on Access to Information.")
+        )
+      elsif hk_exceeded_target_deadline?(created_at)
+        hk_append_flash(
+          :notice,
+          _("This request has exceeded the 21 calendar day target " \
+            "response time.")
+        )
+      end
+    end
+
+    # Flash messages are not always strings: several controllers set them to
+    # a Hash describing a partial to render, e.g. TrackController sets
+    # { partial: 'track/track_set', locals: { ... } } before redirecting
+    # back here. Appending to one of those raises NoMethodError, so leave a
+    # non-string message untouched - the deadline banner in the request
+    # header carries the same information anyway.
+    def hk_append_flash(key, message)
+      existing = flash[key]
+      return if existing && !existing.is_a?(String)
+
+      flash.now[key] = existing.blank? ? message : "#{existing} #{message}"
+    end
 
   end
 

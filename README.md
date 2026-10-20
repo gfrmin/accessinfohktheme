@@ -94,31 +94,29 @@ Traditional Chinese (Hong Kong) translations for theme-specific content:
 
 ## Installation
 
-### In your Alaveteli installation
+This theme is developed and deployed alongside the fork of Alaveteli core
+at [gfrmin/alaveteli](https://github.com/gfrmin/alaveteli) (branch
+`production-0.46.7.0-patched`). For a development environment, clone that
+repository and run `script/setup-dev`, which clones this theme into the
+sibling `alaveteli-themes` directory and links it in. See
+`doc/DEVELOPMENT-ACCESSINFOHK.md` there.
 
-1. Update your `config/general.yml`:
+On a server, `config/general.yml` names the theme:
 
 ```yaml
 THEME_URLS:
-  - 'git://github.com/gfrmin/accessinfohktheme.git'
+  - 'https://github.com/gfrmin/accessinfohktheme.git'
 ```
 
-2. Install the theme:
-
-```bash
-bundle exec rake themes:install
-```
-
-3. Restart your Alaveteli application server
+and `bundle exec rake themes:install` clones it into `lib/themes/`.
 
 ### Locale Configuration
 
-Ensure Traditional Chinese (zh_HK) is enabled in your Alaveteli configuration:
+Ensure Traditional Chinese (zh_HK) is enabled in your Alaveteli configuration
+(the fork's `config/general.yml-example` already does this):
 
 ```yaml
-AVAILABLE_LOCALES:
-  - en
-  - zh_HK
+AVAILABLE_LOCALES: 'en zh_HK'
 ```
 
 ## Testing
@@ -127,6 +125,8 @@ To run theme-specific tests (from the Alaveteli Rails root):
 
 ```bash
 bundle exec rspec lib/themes/accessinfohktheme/spec
+# or, with Docker:
+docker compose run --rm app bundle exec rspec lib/themes/accessinfohktheme/spec
 ```
 
 **Note:** Tests should cover:

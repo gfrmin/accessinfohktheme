@@ -85,6 +85,19 @@ RSpec.describe RequestController, "show action with HK deadline patches",
       get :show, params: { url_title: info_request.url_title }
       expect(response.body).to include('hk-deadline-info')
     end
+
+    it "shows the interim and target deadlines for a waiting request" do
+      info_request = FactoryBot.create(:info_request)
+      get :show, params: { url_title: info_request.url_title }
+      expect(response.body).to include('Interim reply (10 days)')
+      expect(response.body).to include('Target response (21 days)')
+    end
+
+    it "is not shown for a successful request" do
+      info_request = FactoryBot.create(:info_request, :successful)
+      get :show, params: { url_title: info_request.url_title }
+      expect(response.body).not_to include('hk-deadline-info')
+    end
   end
 end
 

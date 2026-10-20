@@ -95,10 +95,11 @@ Traditional Chinese (Hong Kong) translations for theme-specific content:
 ## Installation
 
 This theme is developed and deployed alongside the fork of Alaveteli core
-at [gfrmin/alaveteli](https://github.com/gfrmin/alaveteli) (branch
-`production-0.46.7.0-patched`). For a development environment, clone that
-repository and run `script/setup-dev`, which clones this theme into the
-sibling `alaveteli-themes` directory and links it in. See
+at [gfrmin/alaveteli](https://github.com/gfrmin/alaveteli). For a
+development environment, clone that repository and run `script/setup-dev`,
+which clones this theme into the sibling `alaveteli-themes` directory and
+links it in. Both repositories deploy from `master`, which only changes
+through pull requests. See
 `doc/DEVELOPMENT-ACCESSINFOHK.md` there.
 
 On a server, `config/general.yml` names the theme:
